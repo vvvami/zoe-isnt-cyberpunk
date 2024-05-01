@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import net.vami.zoe.ZoeIsntCyberpunk;
+import net.vami.zoe.block.ModBlocks;
 
 public class ModCreativeModeTabs {
 
@@ -22,6 +23,7 @@ public class ModCreativeModeTabs {
                     .displayItems((pParameters, pOutput) -> {
 
                     pOutput.accept(ModItems.CARBONSTEEL.get());
+                    pOutput.accept(ModBlocks.CARBONSTEEL_BLOCK.get());
 
                     })
                     .build());
