@@ -1,4 +1,8 @@
 {
   "item.zoe.carbonsteel": "Carbonsteel",
-  "creativetab.zoe_materials": "Zoe Materials"
+
+  "creativetab.zoe_materials": "Zoe Materials",
+
+  "block.zoe.carbonsteel_block": "Carbonsteel Block"
+
 }
