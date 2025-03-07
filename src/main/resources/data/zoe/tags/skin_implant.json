@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "zoe:nomex_padding",
+    "zoe:iron_subplating",
+    "zoe:subdermal_weave",
+    "zoe:hydrophobic_coating"
+  ]
+}
