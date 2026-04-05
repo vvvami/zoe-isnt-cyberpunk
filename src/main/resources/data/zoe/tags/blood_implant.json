@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "zoe:thermostatic_injection",
+    "zoe:actuated_serum",
+    "zoe:nanomeds",
+    "zoe:adrenaline_pump"
+  ]
+}
