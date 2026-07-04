@@ -1,11 +1,20 @@
 package net.vami.zoe.item.custom.implants;
 
-import net.minecraft.core.UUIDUtil;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.vami.zoe.ZoeIsntCyberpunk;
+import net.vami.zoe.capability.CapabilityUtil;
+import net.vami.zoe.util.ImplantUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -14,15 +23,54 @@ public abstract class ImplantItem extends Item {
 
     public ImplantItem(Properties pProperties) {
         super(pProperties);
-//        ForgeRegistries.ITEMS.getKey(this);
     }
 
     public void onTick(LivingEntity entity, ItemStack item) {}
+
     public void onEquip(LivingEntity entity, ItemStack item) {}
     public void onUnequip(LivingEntity entity, ItemStack item) {}
-    public void onHit(LivingEntity entity, ItemStack item) {}
-    public void onHurt(LivingEntity entity, ItemStack item) {}
-    public void onDeath(LivingEntity entity, ItemStack item) {}
-    public void onKill(LivingEntity entity, ItemStack item) {}
 
+    public void onHit(LivingEntity source, LivingEntity target, ItemStack item) {}
+    public void onHurt(Entity source, LivingEntity target, ItemStack item) {}
+    public void onDeath(Entity source, LivingEntity target, ItemStack item) {}
+    public void onKill(LivingEntity source, LivingEntity target, ItemStack item) {}
+
+    public abstract void register();
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        if (pLevel.isClientSide) return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
+
+        if (!CapabilityUtil.checkCapability(pPlayer)) return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
+
+        if (ImplantUtil.getSlot(pPlayer, 0).getItem() == Items.AIR) {
+            ImplantUtil.setSlot(pPlayer, pPlayer.getItemInHand(pUsedHand), 0);
+            pPlayer.setItemInHand(pUsedHand, Items.AIR.getDefaultInstance());
+        } else {
+            ImplantUtil.clearSlot(pPlayer, 0);
+        }
+        ZoeIsntCyberpunk.LOGGER.debug(ImplantUtil.getSlot(pPlayer, 0).toString());
+
+        return super.use(pLevel, pPlayer, pUsedHand);
+    }
+
+    @Override
+    public int getMaxStackSize(ItemStack stack) {
+        return 1;
+    }
+
+    @Override
+    public @NotNull ItemStack getDefaultInstance() {
+        ItemStack stack = new ItemStack(this);
+        setDefaultTags(stack);
+        return stack;
+    }
+
+    public static void setDefaultTags(ItemStack stack) {
+        CompoundTag tag = stack.getOrCreateTag();
+
+        if (!tag.contains(ImplantUtil.QUALITY_TAG)) {
+            tag.putDouble(ImplantUtil.QUALITY_TAG, 100f);
+        }
+    }
 }

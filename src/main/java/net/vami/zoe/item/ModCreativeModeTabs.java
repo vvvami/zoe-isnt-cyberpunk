@@ -24,6 +24,9 @@ public class ModCreativeModeTabs {
 
                     pOutput.accept(ModItems.CARBONSTEEL.get());
                     pOutput.accept(ModBlocks.CARBONSTEEL_BLOCK.get());
+                    pOutput.accept(ModItems.REINFORCED_TIBIA.get().getDefaultInstance());
+                    pOutput.accept(ModItems.POWERFIST.get().getDefaultInstance());
+                    pOutput.accept(ModItems.SUBDERMAL_WEAVE.get().getDefaultInstance());
 
                     })
                     .build());

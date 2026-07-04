@@ -13,7 +13,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class PlayerCapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
     public static Capability<PlayerCapability> CAPABILITY =
-            CapabilityManager.get(new CapabilityToken<PlayerCapability>() {});
+            CapabilityManager.get(new CapabilityToken<>() {
+            });
 
 
     private PlayerCapability capability = null;

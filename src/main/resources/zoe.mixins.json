@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.vami.zoe.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "zoe.refmap.json",
+  "mixins": [
+    "FoodDataMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+
+  ]
+}

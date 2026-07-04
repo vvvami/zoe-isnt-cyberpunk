@@ -3,6 +3,8 @@
 
   "creativetab.zoe_materials": "Zoe Materials",
 
-  "block.zoe.carbonsteel_block": "Carbonsteel Block"
+  "block.zoe.carbonsteel_block": "Carbonsteel Block",
+
+  "attribute.zoe.plating": "Plating"
 
 }
