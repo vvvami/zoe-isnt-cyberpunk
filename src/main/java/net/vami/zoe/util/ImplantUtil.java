@@ -354,6 +354,22 @@ public class ImplantUtil {
         return 0;
     }
 
+    public static boolean hasImplants(Player player) {
+        if (!CapabilityUtil.checkCapability(player)) return false;
+
+        PlayerCapability capability = CapabilityUtil.getCapability(player);
+
+        ArrayList<ItemStack> implants = capability.implants.get();
+
+        boolean allSame = Collections.frequency(implants, implants.get(0).getItem()) == implants.size();
+
+        return allSame;
+    }
+
+    public static boolean hasImplants(ArrayList<ItemStack> implants) {
+        return Collections.frequency(implants, implants.get(0).getItem()) != implants.size();
+    }
+
     public static class Builder {
 
         public static JsonArray create(JsonObject ... args) {

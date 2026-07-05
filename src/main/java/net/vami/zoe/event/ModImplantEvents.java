@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -21,18 +22,19 @@ import net.vami.zoe.ZoeIsntCyberpunk;
 import net.vami.zoe.capability.CapabilityUtil;
 import net.vami.zoe.capability.PlayerCapability;
 import net.vami.zoe.capability.PlayerCapabilityProvider;
-import net.vami.zoe.event.custom.ImplantOnEquipEvent;
-import net.vami.zoe.event.custom.ImplantOnUnequipEvent;
+import net.vami.zoe.event.custom.*;
 import net.vami.zoe.item.custom.implants.ImplantItem;
 import net.vami.zoe.util.ImplantUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 @Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID)
 public class ModImplantEvents {
 
-    @Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    private static class implantRegistry {
+    @Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID,
+            bus = Mod.EventBusSubscriber.Bus.MOD)
+    private static class Registry {
         @SubscribeEvent
         public static void registerImplantConfigs(FMLLoadCompleteEvent event) {
             for (Item item : ForgeRegistries.ITEMS.getValues()) {
@@ -105,6 +107,7 @@ public class ModImplantEvents {
         ImplantUtil.applyAttributes(event.getEntity(), true);
 
         Player player = event.getEntity();
+
         ArrayList<ItemStack> implants = ImplantUtil.implants(player);
         for (ItemStack item : implants) {
             if (item.getItem() == Items.AIR) continue;
@@ -117,6 +120,7 @@ public class ModImplantEvents {
         ImplantUtil.applyAttributes(event.getEntity(), false);
 
         Player player = event.getEntity();
+
         ArrayList<ItemStack> implants = ImplantUtil.implants(player);
         for (ItemStack item : implants) {
             if (item.getItem() == Items.AIR) continue;
@@ -127,57 +131,112 @@ public class ModImplantEvents {
     @SubscribeEvent
     public static void onImplantTick(TickEvent.PlayerTickEvent event) {
         Player player = event.player;
+
         ArrayList<ItemStack> implants = ImplantUtil.implants(player);
+
+        if (!ImplantUtil.hasImplants(implants)) return;
+
         for (ItemStack item : implants) {
-            if (item.getItem() == Items.AIR) continue;
+            if (!(item.getItem() instanceof ImplantItem)) continue;
+
             ((ImplantItem) item.getItem()).onTick(player, item);
         }
     }
 
     @SubscribeEvent
     public static void onImplantHit(LivingHurtEvent event) {
-        if (!(event.getSource().getEntity() instanceof Player player)) {
-            return;
-        }
-        for (ItemStack item : ImplantUtil.implants(player)) {
-            if (item.getItem() instanceof ImplantItem implantItem) {
-                implantItem.onHit(player, event.getEntity(), item);
+        if (!(event.getSource().getEntity() instanceof Player player)) return;
+
+        ArrayList<ItemStack> implants = ImplantUtil.implants(player);
+
+        if (!ImplantUtil.hasImplants(implants)) return;
+
+        float amount = event.getAmount();
+        for (ItemStack item : implants) {
+            if (!(item.getItem() instanceof ImplantItem)) continue;
+
+            ImplantOnHitEvent IHE = new ImplantOnHitEvent
+                    (item, event.getEntity(), event.getSource(), event.getAmount());
+            MinecraftForge.EVENT_BUS.post(IHE);
+
+            if (IHE.isCanceled()) {
+                event.setCanceled(IHE.isCanceled());
+                return;
             }
+
+            amount = IHE.getAmount();
         }
+        event.setAmount(amount);
     }
 
     @SubscribeEvent
     public static void onImplantHurt(LivingHurtEvent event) {
-        if (!(event.getEntity() instanceof Player player)) {
-            return;
-        }
-        for (ItemStack item : ImplantUtil.implants(player)) {
-            if (item.getItem() instanceof ImplantItem implantItem) {
-                implantItem.onHurt(event.getSource().getEntity(), player, item);
+        if (!(event.getEntity() instanceof Player player)) return;
+
+        ArrayList<ItemStack> implants = ImplantUtil.implants(player);
+
+        if (!ImplantUtil.hasImplants(implants)) return;
+
+        float amount = event.getAmount();
+        for (ItemStack item : implants) {
+            if (item.getItem() instanceof ImplantItem) {
+
+                ImplantOnHurtEvent IHE = new ImplantOnHurtEvent
+                        (item, player, event.getSource(), event.getAmount());
+                MinecraftForge.EVENT_BUS.post(IHE);
+
+                if (IHE.isCanceled()) {
+                    event.setCanceled(IHE.isCanceled());
+                    return;
+                }
+
+                amount = IHE.getAmount();
             }
         }
+        event.setAmount(amount);
     }
 
     @SubscribeEvent
     public static void onImplantKill(LivingDeathEvent event) {
-        if (!(event.getSource().getEntity() instanceof Player player)) {
-            return;
-        }
-        for (ItemStack item : ImplantUtil.implants(player)) {
-            if (item.getItem() instanceof ImplantItem implantItem) {
-                implantItem.onKill(player, event.getEntity(), item);
+        if (!(event.getSource().getEntity() instanceof Player player)) return;
+
+        ArrayList<ItemStack> implants = ImplantUtil.implants(player);
+
+        if (!ImplantUtil.hasImplants(implants)) return;
+
+        for (ItemStack item : implants) {
+            if (!(item.getItem() instanceof ImplantItem)) continue;
+
+            ImplantOnKillEvent IKE = new ImplantOnKillEvent
+                    (item, event.getEntity(), event.getSource());
+            MinecraftForge.EVENT_BUS.post(IKE);
+
+            if (IKE.isCanceled()) {
+                event.setCanceled(true);
+                return;
             }
         }
     }
 
     @SubscribeEvent
     public static void onImplantDeath(LivingDeathEvent event) {
-        if (!(event.getEntity() instanceof Player player)) {
-            return;
-        }
-        for (ItemStack item : ImplantUtil.implants(player)) {
-            if (item.getItem() instanceof ImplantItem implantItem) {
-                implantItem.onDeath(event.getSource().getEntity(), player, item);
+        if (!(event.getEntity() instanceof Player player)) return;
+
+        ArrayList<ItemStack> implants = ImplantUtil.implants(player);
+
+        if (!ImplantUtil.hasImplants(implants)) return;
+
+        for (ItemStack item : implants) {
+            if (item.getItem() instanceof ImplantItem) {
+
+                ImplantOnDeathEvent IDE = new ImplantOnDeathEvent
+                        (item, player, event.getSource());
+                MinecraftForge.EVENT_BUS.post(IDE);
+
+                if (IDE.isCanceled()) {
+                    event.setCanceled(true);
+                    return;
+                }
             }
         }
     }

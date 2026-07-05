@@ -4,57 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee3427fc-e1d1-4c3b-9e28-90552abf5c85" name="Changes" comment="stuff">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/capability/CapabilityUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ForgeEvents.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModCombatEvents.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModImplantEvents.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/custom/ImplantOnEquipEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/custom/ImplantOnUnequipEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/gui/ModMenuTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/gui/custom/ImplantMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/gui/custom/ImplantScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/init/ModAttributes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/init/ModDamageTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/CortexSupressorItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/FootspringsItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/PowerfistItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/SpikedKnucklesItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/SubdermalWeaveItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/mixin/FoodDataMixin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/ModPackets.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/DoubleJumpC2SPacket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ImplantUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/models/item/powerfist.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/models/item/spiked_knuckles.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/models/item/subdermal_weave.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/shaders/post/green_tint.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/shaders/program/green_tint.fsh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/shaders/program/green_tint.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/gui/zoe_cyberware_interface.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/gui/zoe_inventory_display.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/data/minecraft/tags/bypasses_armor.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/data/minecraft/tags/bypasses_cooldown.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/data/minecraft/tags/bypasses_effects.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/data/minecraft/tags/bypasses_shield.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/data/zoe/damage_type/volt.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/zoe.mixins.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/Zoe_Isn't_Cyberpunk.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/Zoe_Isn't_Cyberpunk.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/net.vami.zoe.Zoe_Isn't_Cyberpunk.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/net.vami.zoe.Zoe_Isn't_Cyberpunk.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="ee3427fc-e1d1-4c3b-9e28-90552abf5c85" name="Changes" comment="implants and double jump and shit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/custom/ImplantOnDeathEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/custom/ImplantOnHitEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/custom/ImplantOnHurtEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/custom/ImplantOnKillEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-02-14-1.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-02-14-10.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-02-14-10.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-02-14-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-02-14-2.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-02-14-3.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-02-14-3.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-02-14-4.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-02-14-4.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-02-14-5.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-02-14-5.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-02-14-6.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-02-14-6.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-02-14-7.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-02-14-7.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-02-14-8.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-02-14-8.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-02-14-9.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-02-14-9.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-3.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-3.log.gz" afterDir="false" />
@@ -62,53 +17,29 @@
       <change beforePath="$PROJECT_DIR$/run/logs/debug-5.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-5.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/options.txt" beforeDir="false" afterPath="$PROJECT_DIR$/run/options.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM-1/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/DIM-1/data/raids.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM1/data/raids_end.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/DIM1/data/raids_end.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/380df991-f603-344c-a090-369bad2a924a.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/advancements/380df991-f603-344c-a090-369bad2a924a.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/data/raids.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/data/random_sequences.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/data/random_sequences.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.-1.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.0.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.0.-1.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.0.1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/level.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/level.dat_old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/380df991-f603-344c-a090-369bad2a924a.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/380df991-f603-344c-a090-369bad2a924a.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/380df991-f603-344c-a090-369bad2a924a.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/380df991-f603-344c-a090-369bad2a924a.dat_old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/poi/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/poi/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.0.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/poi/r.0.1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.1.-1.mca" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.1.1.mca" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.-1.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.1.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.1.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.1.1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/session.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/380df991-f603-344c-a090-369bad2a924a.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/stats/380df991-f603-344c-a090-369bad2a924a.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/ZoeIsntCyberpunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/ZoeIsntCyberpunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/capability/PlayerCapability.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/capability/PlayerCapability.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/capability/PlayerCapabilityProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/capability/PlayerCapabilityProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/ModCreativeModeTabs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/ModCreativeModeTabs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModImplantEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModImplantEvents.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/ModItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/ModItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ImplantItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ImplantItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ReinforcedTibiaItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ReinforcedTibiaItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/zoe/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/lang/en_us.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/zoe/models/item/carbonsteel.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/models/item/carbonsteel.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/item/powered_grip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/item/powerfist.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/zoe/tags/arms_implant.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/zoe/tags/arms_implant.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/zoe/tags/skin_implant.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/zoe/tags/skin_implant.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/CortexSupressorItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/CortexSuppressorItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ImplantUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ImplantUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,61 +124,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="4.918217906624709E-165" />
-      <entry key="MS500" value="1.3751863513055561E-33" />
-      <entry key="S2" value="6.089622739615187E-9" />
-      <entry key="S5" value="5.174137044516838E-4" />
-      <entry key="S10" value="0.022860387165319893" />
-      <entry key="S30" value="0.48993344959945617" />
-      <entry key="S60" value="2.099689883065578" />
-      <entry key="M2" value="5.914702707768717" />
-      <entry key="M5" value="14.941645114156703" />
-      <entry key="M10" value="23.113543287414245" />
-      <entry key="M15" value="27.573244767802684" />
-      <entry key="M30" value="35.4832212283045" />
-      <entry key="H1" value="50.52373076422505" />
-      <entry key="H2" value="83.64794802090051" />
-      <entry key="H4" value="135.36534454363482" />
-      <entry key="D1" value="332.7872006195757" />
-      <entry key="W1" value="554.5206807447847" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.000000037085725" />
+      <entry key="S60" value="1.0005400511024598" />
+      <entry key="M2" value="1.0882031835555817" />
+      <entry key="M5" value="3.8495157567488203" />
+      <entry key="M10" value="13.17143849617068" />
+      <entry key="M15" value="23.5151582274304" />
+      <entry key="M30" value="51.04477303630968" />
+      <entry key="H1" value="85.23726856136645" />
+      <entry key="H2" value="117.85996121391416" />
+      <entry key="H4" value="162.94867797874943" />
+      <entry key="D1" value="432.5297004361581" />
+      <entry key="W1" value="732.891252781386" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000080403358695" />
-      <entry key="S2" value="1.0930869793669065" />
-      <entry key="S5" value="1.7942043833514445" />
-      <entry key="S10" value="2.890986211171138" />
-      <entry key="S30" value="5.344661113297553" />
-      <entry key="S60" value="7.900937881663308" />
-      <entry key="M2" value="12.996070377926209" />
-      <entry key="M5" value="24.658488250215328" />
-      <entry key="M10" value="34.76254654395797" />
-      <entry key="M15" value="40.21561731046711" />
-      <entry key="M30" value="49.193683110334426" />
-      <entry key="H1" value="62.49355338477976" />
-      <entry key="H2" value="86.3774661355696" />
-      <entry key="H4" value="119.72238858303756" />
-      <entry key="D1" value="247.329520011112" />
-      <entry key="W1" value="411.9328126863752" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="1.519955031228276E-91" />
+      <entry key="S5" value="7.102045002889162E-37" />
+      <entry key="S10" value="1.2184775220867837E-18" />
+      <entry key="S30" value="2.5379260653796464E-6" />
+      <entry key="S60" value="0.0045771804002581835" />
+      <entry key="M2" value="0.25165513944614337" />
+      <entry key="M5" value="4.045360651610889" />
+      <entry key="M10" value="14.751905427086855" />
+      <entry key="M15" value="26.699947368448807" />
+      <entry key="M30" value="58.05830540967521" />
+      <entry key="H1" value="95.07530466550972" />
+      <entry key="H2" value="128.15706002956176" />
+      <entry key="H4" value="167.11068545242105" />
+      <entry key="D1" value="359.59313014910384" />
+      <entry key="W1" value="579.7367207866697" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.3369276773743108E-15" />
-      <entry key="MS500" value="0.0010610949440375177" />
-      <entry key="S2" value="0.2460230284529566" />
-      <entry key="S5" value="1.2077061785460064" />
-      <entry key="S10" value="2.512672922084956" />
-      <entry key="S30" value="5.623020854060128" />
-      <entry key="S60" value="9.831940157819517" />
-      <entry key="M2" value="18.744008211558107" />
-      <entry key="M5" value="39.45810977814202" />
-      <entry key="M10" value="57.77531568199137" />
-      <entry key="M15" value="67.7116609567899" />
-      <entry key="M30" value="84.63060816572715" />
-      <entry key="H1" value="112.98838142563282" />
-      <entry key="H2" value="170.0047094839378" />
-      <entry key="H4" value="255.0723168075135" />
-      <entry key="D1" value="580.1109895499627" />
-      <entry key="W1" value="966.4521022084441" />
+      <entry key="MS100" value="0.056328153913176894" />
+      <entry key="MS500" value="0.5625292423444047" />
+      <entry key="S2" value="0.8660366589486319" />
+      <entry key="S5" value="0.9440924191502499" />
+      <entry key="S10" value="0.9716441834078203" />
+      <entry key="S30" value="0.9904598211830956" />
+      <entry key="S60" value="1.000285311845687" />
+      <entry key="M2" value="1.3357959539520798" />
+      <entry key="M5" value="7.880881465769573" />
+      <entry key="M10" value="27.896139760495856" />
+      <entry key="M15" value="50.180383464596595" />
+      <entry key="M30" value="109.06196926591011" />
+      <entry key="H1" value="180.27704251006267" />
+      <entry key="H2" value="245.99223114071785" />
+      <entry key="H4" value="330.042337519615" />
+      <entry key="D1" value="792.115590215616" />
+      <entry key="W1" value="1312.6261859920887" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -260,32 +191,33 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.C:/Users/vami/Desktop/Zoe Isn't Cyberpunk [createMcpToSrg].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Zoe Isn't Cyberpunk [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Zoe Isn't Cyberpunk [createMcpToSrg].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Zoe Isn't Cyberpunk [runClient].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/vami/Desktop/Zoe Isn't Cyberpunk/src/main/resources/data/minecraft/tags&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build Zoe Isn't Cyberpunk.executor": "Run",
+    "Gradle.C:/Users/vami/Desktop/Zoe Isn't Cyberpunk [createMcpToSrg].executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.Zoe Isn't Cyberpunk [build].executor": "Run",
+    "Gradle.Zoe Isn't Cyberpunk [createMcpToSrg].executor": "Run",
+    "Gradle.Zoe Isn't Cyberpunk [runClient].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/vami/Desktop/Zoe Isn't Cyberpunk/src/main/resources/data/minecraft/tags",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\data\minecraft\tags" />
@@ -298,11 +230,11 @@
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\gui" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="net.vami.zoe.item.custom.implants" />
       <recent name="net.vami.zoe.event.custom" />
+      <recent name="net.vami.zoe.item.custom.implants" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Zoe Isn't Cyberpunk [build]">
+  <component name="RunManager" selected="Gradle.Zoe Isn't Cyberpunk [runClient]">
     <configuration name="Zoe Isn't Cyberpunk [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -355,8 +287,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Zoe Isn't Cyberpunk [build]" />
         <item itemvalue="Gradle.Zoe Isn't Cyberpunk [runClient]" />
+        <item itemvalue="Gradle.Zoe Isn't Cyberpunk [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -425,7 +357,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775379366855</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="implants and double jump and shit">
+      <option name="closed" value="true" />
+      <created>1783198162132</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1783198162132</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -448,7 +388,8 @@
     <MESSAGE value="implant mod events" />
     <MESSAGE value="cool stuff" />
     <MESSAGE value="stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="stuff" />
+    <MESSAGE value="implants and double jump and shit" />
+    <option name="LAST_COMMIT_MESSAGE" value="implants and double jump and shit" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

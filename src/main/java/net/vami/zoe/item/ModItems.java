@@ -31,8 +31,8 @@ public class ModItems {
     public static final RegistryObject<FootspringsItem> FOOTSPRINGS = ITEMS.register("footsprings",
             () -> new FootspringsItem(new Item.Properties()));
 
-    public static final RegistryObject<CortexSupressorItem> CORTEX_SUPRESSOR = ITEMS.register("cortex_supressor",
-            () -> new CortexSupressorItem(new Item.Properties()));
+    public static final RegistryObject<CortexSuppressorItem> CORTEX_SUPPRESSOR = ITEMS.register("cortex_suppressor",
+            () -> new CortexSuppressorItem(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
