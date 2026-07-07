@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.vami.zoe.ZoeIsntCyberpunk;
 import net.vami.zoe.event.custom.ImplantOnHitEvent;
 import net.vami.zoe.init.ModDamageTypes;
+import net.vami.zoe.item.ModItems;
 import net.vami.zoe.util.ImplantUtil;
 @Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID)
 public class PowerfistItem extends ImplantItem {
@@ -31,6 +32,7 @@ public class PowerfistItem extends ImplantItem {
         CompoundTag tag = item.getOrCreateTag();
 
         if (!damageSource.is(DamageTypes.PLAYER_ATTACK)) return;
+        if (!(item.getItem() == ModItems.POWERFIST.get())) return;
 
         if (tag.getBoolean("zPowerfist")) {
             return;
@@ -46,6 +48,7 @@ public class PowerfistItem extends ImplantItem {
         } finally {
             tag.putBoolean("zPowerfist", false);
         }
+        System.out.println("triggered powerfist");
     }
 
     @Override

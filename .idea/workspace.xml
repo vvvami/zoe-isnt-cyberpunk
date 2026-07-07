@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee3427fc-e1d1-4c3b-9e28-90552abf5c85" name="Changes" comment="event improvements and changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/client/model/ReinforcedTibiaLayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/client/renderer/ClientImplantRenderState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/client/renderer/ClientLayerRegistry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/client/renderer/ImplantRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/client/renderer/implant/EaraRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/client/renderer/implant/PowerfistRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/client/renderer/implant/ReinforcedTibiaRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/EaraItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/SyncImplantsS2CPacket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ImplantRenderUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ResrcUtil.java" afterDir="false" />
+    <list default="true" id="ee3427fc-e1d1-4c3b-9e28-90552abf5c85" name="Changes" comment="added animated renderlayer&#10;fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
@@ -46,29 +35,20 @@
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/session.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/380df991-f603-344c-a090-369bad2a924a.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/stats/380df991-f603-344c-a090-369bad2a924a.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/ZoeIsntCyberpunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/ZoeIsntCyberpunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/capability/CapabilityUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/capability/CapUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ForgeEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ForgeEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModImplantEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModImplantEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/gui/ModMenuTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/client/gui/ModMenuTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/gui/custom/ImplantMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/client/gui/custom/ImplantMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/gui/custom/ImplantScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/client/gui/custom/ImplantScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/ModItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/ModItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/FootspringsItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ThrustersItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ImplantItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ImplantItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/PowerfistItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/PowerfistItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/ModPackets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/ModPackets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/DoubleJumpC2SPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/DoubleJumpC2SPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ImplantUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ImplantUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="repository" />
+    </option>
   </component>
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="487" />
@@ -149,61 +129,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.573313328431372E-33" />
-      <entry key="MS500" value="3.0585791325483035E-7" />
-      <entry key="S2" value="0.03283325410793535" />
-      <entry key="S5" value="0.45080587775480785" />
-      <entry key="S10" value="1.1892720071241762" />
-      <entry key="S30" value="2.9218741333862783" />
-      <entry key="S60" value="4.221220834290272" />
-      <entry key="M2" value="5.322838663382091" />
-      <entry key="M5" value="6.373298323007877" />
-      <entry key="M10" value="8.59442640760362" />
-      <entry key="M15" value="12.426166461814613" />
-      <entry key="M30" value="25.410460261324996" />
-      <entry key="H1" value="43.5199920121515" />
-      <entry key="H2" value="69.90385543707039" />
-      <entry key="H4" value="116.52358027504954" />
-      <entry key="D1" value="323.03796222020407" />
-      <entry key="W1" value="868.9407277343263" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="9.152916993448467E-102" />
+      <entry key="S5" value="1.4953120072451494E-40" />
+      <entry key="S10" value="4.1795999762158E-20" />
+      <entry key="S30" value="2.0690439015758726E-6" />
+      <entry key="S60" value="0.00600150823337483" />
+      <entry key="M2" value="0.3332731928852083" />
+      <entry key="M5" value="3.802855481443181" />
+      <entry key="M10" value="9.17163354740778" />
+      <entry key="M15" value="13.4593806019874" />
+      <entry key="M30" value="25.655312175076933" />
+      <entry key="H1" value="45.43493737811805" />
+      <entry key="H2" value="74.66153725762287" />
+      <entry key="H4" value="123.50017651027764" />
+      <entry key="D1" value="336.439495501533" />
+      <entry key="W1" value="885.7995978124603" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.004583562354551" />
-      <entry key="MS500" value="1.4142742956764731" />
-      <entry key="S2" value="2.2855671912664817" />
-      <entry key="S5" value="2.783611657584823" />
-      <entry key="S10" value="3.7740767640409523" />
-      <entry key="S30" value="8.427907680908762" />
-      <entry key="S60" value="12.274682145515108" />
-      <entry key="M2" value="15.412070855750615" />
-      <entry key="M5" value="18.05904889531098" />
-      <entry key="M10" value="20.631265928841856" />
-      <entry key="M15" value="24.047691509762412" />
-      <entry key="M30" value="34.95334487614405" />
-      <entry key="H1" value="50.63001626405916" />
-      <entry key="H2" value="76.99880112424889" />
-      <entry key="H4" value="128.37891854144766" />
-      <entry key="D1" value="341.542003949644" />
-      <entry key="W1" value="782.5021069625283" />
+      <entry key="MS100" value="1.0863472483774759" />
+      <entry key="MS500" value="1.9521742842581233" />
+      <entry key="S2" value="2.6494644131976197" />
+      <entry key="S5" value="2.850557552559693" />
+      <entry key="S10" value="2.9236415783794483" />
+      <entry key="S30" value="2.9741741105248876" />
+      <entry key="S60" value="2.9891671305728904" />
+      <entry key="M2" value="3.1388214683867397" />
+      <entry key="M5" value="4.965031768772123" />
+      <entry key="M10" value="9.03207650818785" />
+      <entry key="M15" value="13.32077373069319" />
+      <entry key="M30" value="25.88740991279685" />
+      <entry key="H1" value="45.232801345966784" />
+      <entry key="H2" value="74.99770857850183" />
+      <entry key="H4" value="128.48133691054397" />
+      <entry key="D1" value="348.67707604256316" />
+      <entry key="W1" value="793.579335212902" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.008793444553040106" />
-      <entry key="MS500" value="0.4908913766534768" />
-      <entry key="S2" value="1.7251228570724877" />
-      <entry key="S5" value="2.8326926355102287" />
-      <entry key="S10" value="4.609197743511568" />
-      <entry key="S30" value="11.076971604536748" />
-      <entry key="S60" value="16.302456365447544" />
-      <entry key="M2" value="20.615221239864955" />
-      <entry key="M5" value="24.376555710323924" />
-      <entry key="M10" value="29.192652239975953" />
-      <entry key="M15" value="36.44644929943579" />
-      <entry key="M30" value="60.34080245858855" />
-      <entry key="H1" value="94.13166355399069" />
-      <entry key="H2" value="146.88790880854748" />
-      <entry key="H4" value="244.88954427926998" />
-      <entry key="D1" value="664.5736551288102" />
-      <entry key="W1" value="1651.4405736140725" />
+      <entry key="MS100" value="0.2109452439470002" />
+      <entry key="MS500" value="1.217297433275306" />
+      <entry key="S2" value="2.265858269615505" />
+      <entry key="S5" value="2.666676037152033" />
+      <entry key="S10" value="2.825736220145538" />
+      <entry key="S30" value="2.9401206296604396" />
+      <entry key="S60" value="2.9778793136546633" />
+      <entry key="M2" value="3.4607652302514507" />
+      <entry key="M5" value="8.750402909717478" />
+      <entry key="M10" value="18.18328012504999" />
+      <entry key="M15" value="26.759650979629015" />
+      <entry key="M30" value="51.52271420543764" />
+      <entry key="H1" value="90.64992041622035" />
+      <entry key="H2" value="149.64421274751228" />
+      <entry key="H4" value="251.96825949909186" />
+      <entry key="D1" value="685.1100993723854" />
+      <entry key="W1" value="1679.376638943211" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -400,7 +380,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783236894009</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added animated renderlayer&#10;fixes">
+      <option name="closed" value="true" />
+      <created>1783456506980</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1783456506980</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,7 +413,8 @@
     <MESSAGE value="stuff" />
     <MESSAGE value="implants and double jump and shit" />
     <MESSAGE value="event improvements and changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="event improvements and changes" />
+    <MESSAGE value="added animated renderlayer&#10;fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="added animated renderlayer&#10;fixes" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
