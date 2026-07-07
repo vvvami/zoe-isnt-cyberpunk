@@ -14,6 +14,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.vami.zoe.ZoeIsntCyberpunk;
 import net.vami.zoe.network.packet.DoubleJumpC2SPacket;
+import net.vami.zoe.network.packet.SyncImplantsS2CPacket;
 
 @Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID)
 public class ModPackets {
@@ -37,9 +38,15 @@ public class ModPackets {
         INSTANCE = net;
 
         net.messageBuilder(DoubleJumpC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .encoder(DoubleJumpC2SPacket::toBytes)
+                .encoder(DoubleJumpC2SPacket::encode)
                 .decoder(DoubleJumpC2SPacket::new)
                 .consumerMainThread(DoubleJumpC2SPacket::handle)
+                .add();
+
+        net.messageBuilder(SyncImplantsS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(SyncImplantsS2CPacket::encode)
+                .decoder(SyncImplantsS2CPacket::new)
+                .consumerMainThread(SyncImplantsS2CPacket::handle)
                 .add();
     }
 
@@ -47,14 +54,18 @@ public class ModPackets {
         INSTANCE.sendToServer(message);
     }
 
-    // This is a testr
     public static <MSG> void sendToClient(MSG message, Player player) {
-        if (player instanceof Player) {
-            if (player instanceof ServerPlayer serverPlayer) {
+        if (player instanceof ServerPlayer serverPlayer) {
 
-                ModPackets.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer), message);
-            }
+            ModPackets.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer), message);
         }
+    }
+
+    public static <MSG> void sendToTrackingAndSelf(MSG message, ServerPlayer player) {
+        ModPackets.INSTANCE.send(
+                PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player),
+                message
+        );
     }
 
     public static <MSG> void sendToPlayer(MSG message, Entity player) {

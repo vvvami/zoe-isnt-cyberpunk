@@ -3,6 +3,7 @@ package net.vami.zoe.util;
 import com.google.gson.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -12,13 +13,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.vami.zoe.ZoeIsntCyberpunk;
-import net.vami.zoe.capability.CapabilityUtil;
+import net.vami.zoe.capability.CapUtil;
 import net.vami.zoe.capability.PlayerCapability;
 import net.vami.zoe.event.custom.ImplantOnEquipEvent;
 import net.vami.zoe.event.custom.ImplantOnUnequipEvent;
 import net.vami.zoe.item.custom.implants.ImplantItem;
+import net.vami.zoe.network.ModPackets;
+import net.vami.zoe.network.packet.SyncImplantsS2CPacket;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -34,7 +38,7 @@ public class ImplantUtil {
         if (implant.isEmpty()) return;
         if (!(implant.getItem() instanceof ImplantItem newImplantItem)) return;
 
-        PlayerCapability capability = CapabilityUtil.getCapability(player);
+        PlayerCapability capability = CapUtil.getCap(player);
 
         ArrayList<ItemStack> implantList = capability.implants.get();
 
@@ -62,7 +66,7 @@ public class ImplantUtil {
     }
 
     public static void clearSlot(Player player, int slot) {
-        PlayerCapability capability = CapabilityUtil.getCapability(player);
+        PlayerCapability capability = CapUtil.getCap(player);
 
         ArrayList<ItemStack> implantList = capability.implants.get();
 
@@ -71,7 +75,7 @@ public class ImplantUtil {
         ImplantOnUnequipEvent IUE = new ImplantOnUnequipEvent(player, implantStack);
         MinecraftForge.EVENT_BUS.post(IUE);
 
-        if (IUE.isCanceled()
+        if (!IUE.isCanceled()
                 && implantStack.getItem() instanceof ImplantItem implantItem) {
 
             implantItem.onUnequip(player, implantStack);
@@ -79,12 +83,16 @@ public class ImplantUtil {
 
         implantList.set(slot, ItemStack.EMPTY);
         ImplantUtil.set(implantList, capability);
+
+        // Sync implant unequipping to client
+        if (!(player instanceof ServerPlayer serverPlayer)) return;
+        ImplantUtil.syncImplants(serverPlayer);
     }
 
     public static ItemStack getImplant(Player player, Item item) {
-        if (!CapabilityUtil.checkCapability(player)) return ItemStack.EMPTY;
+        if (!CapUtil.hasCapability(player)) return ItemStack.EMPTY;
 
-        PlayerCapability capability = CapabilityUtil.getCapability(player);
+        PlayerCapability capability = CapUtil.getCap(player);
         ArrayList<ItemStack> implantList = capability.implants.get();
 
         for (ItemStack itemStack : implantList) {
@@ -100,13 +108,13 @@ public class ImplantUtil {
     }
 
     public static ItemStack getSlot(Player player, int slot) {
-        PlayerCapability capability = CapabilityUtil.getCapability(player);
+        PlayerCapability capability = CapUtil.getCap(player);
         return capability.implants.get().get(slot);
     }
 
     public static ArrayList<ItemStack> implants(Player player) {
-        if (CapabilityUtil.checkCapability(player)) {
-            PlayerCapability capability = CapabilityUtil.getCapability(player);
+        if (CapUtil.hasCapability(player)) {
+            PlayerCapability capability = CapUtil.getCap(player);
             return capability.implants.get();
         }
         return new ArrayList<>(Collections.nCopies(20, ItemStack.EMPTY));
@@ -114,6 +122,19 @@ public class ImplantUtil {
 
     public static void set(ArrayList<ItemStack> implants, PlayerCapability capability) {
         capability.implants.set(implants);
+    }
+
+    public static void syncImplants(ServerPlayer player) {
+        if (!CapUtil.hasCapability(player)) return;
+
+        PlayerCapability capability = CapUtil.getCap(player);
+
+        List<ItemStack> implantsCopy = new ArrayList<>(capability.implants.get());
+
+        ModPackets.sendToTrackingAndSelf(
+                new SyncImplantsS2CPacket(player.getUUID(), implantsCopy),
+                player
+        );
     }
 
     public static File getFile(ImplantItem item, String path) {
@@ -192,7 +213,7 @@ public class ImplantUtil {
     );
 
     public static void applyAttributes(LivingEntity entity, boolean apply) {
-        if (!CapabilityUtil.checkCapability(entity)) return;
+        if (!CapUtil.hasCapability(entity)) return;
 
         removeImplantAttributes(entity);
 
@@ -201,7 +222,7 @@ public class ImplantUtil {
             return;
         }
 
-        PlayerCapability capability = CapabilityUtil.getCapability(entity);
+        PlayerCapability capability = CapUtil.getCap(entity);
 
         Map<Attribute, EnumMap<AttributeModifier.Operation, Double>> bonuses = new HashMap<>();
 
@@ -355,9 +376,9 @@ public class ImplantUtil {
     }
 
     public static boolean hasImplants(Player player) {
-        if (!CapabilityUtil.checkCapability(player)) return false;
+        if (!CapUtil.hasCapability(player)) return false;
 
-        PlayerCapability capability = CapabilityUtil.getCapability(player);
+        PlayerCapability capability = CapUtil.getCap(player);
 
         ArrayList<ItemStack> implants = capability.implants.get();
 

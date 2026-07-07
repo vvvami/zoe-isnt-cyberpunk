@@ -1,4 +1,4 @@
-package net.vami.zoe.gui.custom;
+package net.vami.zoe.client.gui.custom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;

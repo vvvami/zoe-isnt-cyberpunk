@@ -19,8 +19,8 @@ import net.vami.zoe.network.packet.DoubleJumpC2SPacket;
 import net.vami.zoe.util.ImplantUtil;
 import org.lwjgl.glfw.GLFW;
 
-public class FootspringsItem extends ImplantItem {
-    public FootspringsItem(Properties pProperties) {
+public class ThrustersItem extends ImplantItem {
+    public ThrustersItem(Properties pProperties) {
         super(pProperties);
 
     }
@@ -60,7 +60,7 @@ public class FootspringsItem extends ImplantItem {
             if (!(event.getEntity() instanceof Player player)) return;
 
             resetAirJumps
-                    (ImplantUtil.getImplant(player, ModItems.FOOTSPRINGS.get()));
+                    (ImplantUtil.getImplant(player, ModItems.THRUSTERS.get()));
         }
 
         @SubscribeEvent
@@ -69,7 +69,7 @@ public class FootspringsItem extends ImplantItem {
             if (!(event.getEntity() instanceof Player player)) return;
 
             resetAirJumps
-                    (ImplantUtil.getImplant(player, ModItems.FOOTSPRINGS.get()));
+                    (ImplantUtil.getImplant(player, ModItems.THRUSTERS.get()));
         }
     }
 
@@ -89,7 +89,7 @@ public class FootspringsItem extends ImplantItem {
         if (player.isFallFlying()) return;
         if (player.isInWaterOrBubble()) return;
 
-        ItemStack implant = ImplantUtil.getImplant(player, ModItems.FOOTSPRINGS.get());
+        ItemStack implant = ImplantUtil.getImplant(player, ModItems.THRUSTERS.get());
 
         CompoundTag data = implant.getOrCreateTag();
 

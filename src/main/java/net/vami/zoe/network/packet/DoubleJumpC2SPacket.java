@@ -3,7 +3,7 @@ package net.vami.zoe.network.packet;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkEvent;
-import net.vami.zoe.item.custom.implants.FootspringsItem;
+import net.vami.zoe.item.custom.implants.ThrustersItem;
 
 import java.util.function.Supplier;
 
@@ -18,7 +18,7 @@ public class DoubleJumpC2SPacket {
         this.playerId = buf.readInt();
     }
 
-    public void toBytes(FriendlyByteBuf buf) {
+    public void encode(FriendlyByteBuf buf) {
         buf.writeInt(this.playerId);
     }
 
@@ -31,7 +31,7 @@ public class DoubleJumpC2SPacket {
             Player player = (Player) context.getSender().level().getEntity(playerId);
             if (player == null) return;
 
-            FootspringsItem.doubleJump(player);
+            ThrustersItem.doubleJump(player);
         });
 
         context.setPacketHandled(true);

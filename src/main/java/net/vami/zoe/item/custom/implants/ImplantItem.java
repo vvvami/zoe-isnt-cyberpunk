@@ -12,7 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.vami.zoe.ZoeIsntCyberpunk;
-import net.vami.zoe.capability.CapabilityUtil;
+import net.vami.zoe.capability.CapUtil;
+import net.vami.zoe.capability.PlayerCapability;
 import net.vami.zoe.util.ImplantUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,15 +42,16 @@ public abstract class ImplantItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (pLevel.isClientSide) return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
 
-        if (!CapabilityUtil.checkCapability(pPlayer)) return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
+        ArrayList<ItemStack> implants = ImplantUtil.implants(pPlayer);
 
-        if (ImplantUtil.getSlot(pPlayer, 0).getItem() == Items.AIR) {
-            ImplantUtil.setSlot(pPlayer, pPlayer.getItemInHand(pUsedHand), 0);
-            pPlayer.setItemInHand(pUsedHand, Items.AIR.getDefaultInstance());
-        } else {
-            ImplantUtil.clearSlot(pPlayer, 0);
+        for (int i = 0; i < implants.size(); i++) {
+            if (implants.get(i).getItem() == Items.AIR) {
+                ImplantUtil.setSlot(pPlayer, pPlayer.getItemInHand(pUsedHand), i);
+                pPlayer.setItemInHand(pUsedHand, Items.AIR.getDefaultInstance());
+                ZoeIsntCyberpunk.LOGGER.debug(implants.get(i).toString());
+                break;
+            }
         }
-        ZoeIsntCyberpunk.LOGGER.debug(ImplantUtil.getSlot(pPlayer, 0).toString());
 
         return super.use(pLevel, pPlayer, pUsedHand);
     }

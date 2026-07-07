@@ -28,11 +28,14 @@ public class ModItems {
     public static final RegistryObject<SubdermalWeaveItem> SUBDERMAL_WEAVE = ITEMS.register("subdermal_weave",
             () -> new SubdermalWeaveItem(new Item.Properties()));
 
-    public static final RegistryObject<FootspringsItem> FOOTSPRINGS = ITEMS.register("footsprings",
-            () -> new FootspringsItem(new Item.Properties()));
+    public static final RegistryObject<ThrustersItem> THRUSTERS = ITEMS.register("thrusters",
+            () -> new ThrustersItem(new Item.Properties()));
 
     public static final RegistryObject<CortexSuppressorItem> CORTEX_SUPPRESSOR = ITEMS.register("cortex_suppressor",
             () -> new CortexSuppressorItem(new Item.Properties()));
+
+    public static final RegistryObject<EaraItem> EARA = ITEMS.register("eara",
+            () -> new EaraItem(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

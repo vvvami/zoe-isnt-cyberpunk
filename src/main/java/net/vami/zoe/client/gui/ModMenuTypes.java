@@ -1,4 +1,4 @@
-package net.vami.zoe.gui;
+package net.vami.zoe.client.gui;
 
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -9,7 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.vami.zoe.ZoeIsntCyberpunk;
-import net.vami.zoe.gui.custom.ImplantMenu;
+import net.vami.zoe.client.gui.custom.ImplantMenu;
 
 public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
