@@ -1,4 +1,4 @@
-package net.vami.zoe.client.renderer;
+package net.vami.zoe.layer.renderer.implant;
 
 import net.minecraft.resources.ResourceLocation;
 

@@ -1,4 +1,4 @@
-package net.vami.zoe.client.renderer;
+package net.vami.zoe.layer;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -11,12 +11,12 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vami.zoe.ZoeIsntCyberpunk;
-import net.vami.zoe.client.model.EaraLayer;
-import net.vami.zoe.client.model.PowerfistLayer;
-import net.vami.zoe.client.model.ReinforcedTibiaLayer;
-import net.vami.zoe.client.renderer.implant.EaraRender;
-import net.vami.zoe.client.renderer.implant.PowerfistRender;
-import net.vami.zoe.client.renderer.implant.ReinforcedTibiaRender;
+import net.vami.zoe.layer.model.EaraLayer;
+import net.vami.zoe.layer.model.PowerfistLayer;
+import net.vami.zoe.layer.model.ReinforcedTibiaLayer;
+import net.vami.zoe.layer.renderer.implant.EaraRender;
+import net.vami.zoe.layer.renderer.implant.PowerfistRender;
+import net.vami.zoe.layer.renderer.implant.ReinforcedTibiaRender;
 
 import java.util.List;
 

@@ -48,7 +48,6 @@ public class PowerfistItem extends ImplantItem {
         } finally {
             tag.putBoolean("zPowerfist", false);
         }
-        System.out.println("triggered powerfist");
     }
 
     @Override
