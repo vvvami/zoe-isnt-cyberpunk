@@ -12,6 +12,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.vami.zoe.entity.client.model.ArbiterModel;
+import net.vami.zoe.entity.client.renderer.ArbiterRenderer;
 import net.vami.zoe.util.ResUtil;
 
 public class ArbiterVibrateLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
@@ -26,9 +28,9 @@ public class ArbiterVibrateLayer<T extends LivingEntity, M extends EntityModel<T
     @Override
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 
-        ResourceLocation texture = this.getTextureLocation(entity);
+        ResourceLocation texture = ArbiterGlowLayer.GLOW_TEXTURE;
 
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(texture));
+        VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.eyes(texture));
 
         long baseSeed = entity.getId() * 31L + (entity.tickCount);
 
@@ -40,16 +42,12 @@ public class ArbiterVibrateLayer<T extends LivingEntity, M extends EntityModel<T
 
         poseStack.pushPose();
 
-        poseStack.translate(x, y, z);
-
-        // Slight scale helps avoid z-fighting with the original model.
-        float scale = 1.01f;
-        poseStack.scale(scale, scale, scale);
+        poseStack.translate(x - 0.1f, y, z);
 
         this.getParentModel().renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY,
-                1.0f,
-                1.0f,
-                1.0f,
+                1f,
+                1f,
+                1f,
                 ALPHA);
 
         poseStack.popPose();

@@ -118,6 +118,7 @@ public class ArbiterModel<T extends Entity> extends HierarchicalModel<T> {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		this.animateWalk(ArbiterAnimations.walk, limbSwing, limbSwingAmount, 16f, 20f);
+
 		this.animate(((ArbiterEntity) entity).animation_idle1, ArbiterAnimations.idle1, ageInTicks, 1f);
 		this.animate(((ArbiterEntity) entity).animation_idle2, ArbiterAnimations.idle2, ageInTicks, 1f);
 

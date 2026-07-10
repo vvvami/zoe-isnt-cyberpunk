@@ -17,7 +17,7 @@ import net.vami.zoe.util.ResUtil;
 public class ArbiterGlowLayer<T extends LivingEntity, M extends EntityModel<T>>
         extends RenderLayer<T, M> {
 
-    private static final ResourceLocation GLOW_TEXTURE =
+    public static final ResourceLocation GLOW_TEXTURE =
             ResUtil.entity("arbiter_glow");
 
     public ArbiterGlowLayer(RenderLayerParent<T, M> parent) {

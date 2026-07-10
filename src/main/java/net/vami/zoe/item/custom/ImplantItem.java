@@ -1,4 +1,4 @@
-package net.vami.zoe.item.custom.implants;
+package net.vami.zoe.item.custom;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
@@ -12,9 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.vami.zoe.ZoeIsntCyberpunk;
-import net.vami.zoe.capability.CapUtil;
-import net.vami.zoe.capability.PlayerCapability;
-import net.vami.zoe.util.ImplantUtil;
+import net.vami.zoe.util.implant.ImplantData;
+import net.vami.zoe.util.implant.ImplantUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public abstract class ImplantItem extends Item {
     public void onDeath(Entity source, LivingEntity target, ItemStack item) {}
     public void onKill(LivingEntity source, LivingEntity target, ItemStack item) {}
 
-    public abstract void register();
+    public abstract ImplantData data();
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {

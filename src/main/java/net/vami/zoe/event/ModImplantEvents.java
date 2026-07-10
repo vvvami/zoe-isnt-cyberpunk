@@ -21,10 +21,11 @@ import net.vami.zoe.capability.CapUtil;
 import net.vami.zoe.capability.PlayerCapability;
 import net.vami.zoe.capability.PlayerCapabilityProvider;
 import net.vami.zoe.event.custom.*;
-import net.vami.zoe.item.custom.implants.ImplantItem;
+import net.vami.zoe.item.custom.ImplantItem;
 import net.vami.zoe.network.ModPackets;
 import net.vami.zoe.network.packet.SyncImplantsS2CPacket;
-import net.vami.zoe.util.ImplantUtil;
+import net.vami.zoe.util.implant.ImplantConfig;
+import net.vami.zoe.util.implant.ImplantUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class ModImplantEvents {
         public static void registerImplantConfigs(FMLLoadCompleteEvent event) {
             for (Item item : ForgeRegistries.ITEMS.getValues()) {
                 if (item instanceof ImplantItem implantItem) {
-                    implantItem.register();
+                    ImplantConfig.register(implantItem, implantItem.data()); ;
                 }
             }
         }

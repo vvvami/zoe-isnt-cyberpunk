@@ -1,4 +1,4 @@
-package net.vami.zoe.util;
+package net.vami.zoe.util.implant;
 
 import com.google.gson.*;
 import net.minecraft.nbt.CompoundTag;
@@ -11,27 +11,24 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.loading.FMLPaths;
-import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.vami.zoe.ZoeIsntCyberpunk;
 import net.vami.zoe.capability.CapUtil;
 import net.vami.zoe.capability.PlayerCapability;
 import net.vami.zoe.event.custom.ImplantOnEquipEvent;
 import net.vami.zoe.event.custom.ImplantOnUnequipEvent;
-import net.vami.zoe.item.custom.implants.ImplantItem;
+import net.vami.zoe.item.custom.ImplantItem;
 import net.vami.zoe.network.ModPackets;
 import net.vami.zoe.network.packet.SyncImplantsS2CPacket;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class ImplantUtil {
-    public static final String IMPLANT_CONFIG_PATH = "/config/zoe/implants";
-
     public static final String QUALITY_TAG = "zQuality";
 
     public static void setSlot(Player player, ItemStack implant, int slot) {
@@ -124,6 +121,7 @@ public class ImplantUtil {
         capability.implants.set(implants);
     }
 
+    // syncs implants to the client
     public static void syncImplants(ServerPlayer player) {
         if (!CapUtil.hasCapability(player)) return;
 
@@ -137,70 +135,8 @@ public class ImplantUtil {
         );
     }
 
-    public static File getFile(ImplantItem item, String path) {
-            if (path == null) return new File("");
-
-            File itemFile;
-            itemFile = new File((FMLPaths.GAMEDIR.get().toString() + path),
-                    File.separator +
-                            ((ForgeRegistries.ITEMS.getKey(item).toString())
-                                    .replace(":", "_") + ".json"));
-            return itemFile;
-    }
-
-    public static void registerImplant(ImplantItem implant, JsonArray attributeArr, float baseHumanity) {
-        boolean updateFile = false;
-        JsonObject mainObj = new JsonObject();
-
-        File implantFile = getFile(implant, IMPLANT_CONFIG_PATH);
-        if (implantFile.exists()) {
-            {
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader(implantFile));
-                    StringBuilder jsonstringbuilder = new StringBuilder();
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        jsonstringbuilder.append(line);
-                    }
-                    bufferedReader.close();
-                    mainObj = new Gson().fromJson(jsonstringbuilder.toString(), JsonObject.class);
-                    updateFile = mainObj.get("update").getAsBoolean();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            try {
-                implantFile.getParentFile().mkdirs();
-                implantFile.createNewFile();
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-            updateFile = true;
-        }
-        if (updateFile) {
-            mainObj.addProperty("enabled", true);
-
-            if (attributeArr != null) {
-                mainObj.add("attributes", attributeArr);
-            }
-
-            mainObj.addProperty("maxQuality", 0);
-            mainObj.addProperty("humanityScaling", baseHumanity);
-            mainObj.addProperty("update", true);
-        }
-        Gson builder = new GsonBuilder().setPrettyPrinting().create();
-        try {
-            FileWriter fileWriter = new FileWriter(implantFile);
-            fileWriter.write(builder.toJson(mainObj));
-            fileWriter.close();
-        } catch (IOException exception) {
-            ZoeIsntCyberpunk.LOGGER.error("Failed to write implant file - ", exception);
-
-        }
-
-    }
-
+    // every operation needs its own uuid or they wont function properly
+    // there needa be differentiation between "ADDITION" and "MULTIPLY BASE" for example
     private static final Map<AttributeModifier.Operation, UUID> IMPLANT_ATTRIBUTE_UUIDS = Map.of(
             AttributeModifier.Operation.ADDITION,
             UUID.fromString("eecb3dee-1220-486b-a27e-320e71c32c1d"),
@@ -224,52 +160,30 @@ public class ImplantUtil {
 
         PlayerCapability capability = CapUtil.getCap(entity);
 
+        // this creates a map like this
+        // MOVEMENT_SPEED:
+        // ADDITION        -> 0.2
+        // MULTIPLY_TOTAL  -> 0.15
         Map<Attribute, EnumMap<AttributeModifier.Operation, Double>> bonuses = new HashMap<>();
 
         for (ItemStack implant : capability.implants.get()) {
             if (implant.isEmpty()) continue;
             if (!(implant.getItem() instanceof ImplantItem implantItem)) continue;
 
-            File implantFile = ImplantUtil.getFile(
-                    implantItem,
-                    ImplantUtil.IMPLANT_CONFIG_PATH
-            );
+            Path path = ImplantConfig.getPath(implantItem);
+            ImplantData implantData = ImplantConfig.read(path);
 
-            if (!implantFile.isFile()) {
-                ZoeIsntCyberpunk.LOGGER.error("Implant file does not exist: {}", implantFile.getName());
+            if (implantData == ImplantData.DEFAULT) {
+                ZoeIsntCyberpunk.LOGGER.error("Implant file does not exist: {}", implantItem.getDescriptionId());
                 continue;
             }
 
-            JsonObject mainObj;
+            List<ImplantData.Attribute> attributes = implantData.attributes();
 
-            try (BufferedReader reader = Files.newBufferedReader(
-                    implantFile.toPath(),
-                    StandardCharsets.UTF_8
-            )) {
-                mainObj = new Gson().fromJson(reader, JsonObject.class);
-            } catch (IOException | JsonParseException e) {
-                ZoeIsntCyberpunk.LOGGER.error("Failed to read implant file {}", implantFile.getName(), e);
-                continue;
-            }
+            for (ImplantData.Attribute attr : attributes) {
 
-            if (mainObj == null || !mainObj.has("attributes") || !mainObj.get("attributes").isJsonArray()) {
-                continue;
-            }
 
-            JsonArray attributes = mainObj.getAsJsonArray("attributes");
-
-            for (JsonElement element : attributes) {
-                if (!element.isJsonObject()) continue;
-
-                JsonObject attributeObj = element.getAsJsonObject();
-
-                if (!attributeObj.has("attribute") || !attributeObj.has("amplifier")) {
-                    continue;
-                }
-
-                ResourceLocation attributeId = ResourceLocation.tryParse(
-                        attributeObj.get("attribute").getAsString()
-                );
+                ResourceLocation attributeId = attr.attribute();
 
                 if (attributeId == null) {
                     continue;
@@ -281,13 +195,9 @@ public class ImplantUtil {
                     continue;
                 }
 
-                double amplifier = attributeObj.get("amplifier").getAsDouble();
+                double amplifier = attr.amplifier();
 
-                String modifierName = attributeObj.has("modifier")
-                        ? attributeObj.get("modifier").getAsString()
-                        : "percentage";
-
-                AttributeModifier.Operation operation = getOperationFromString(modifierName);
+                AttributeModifier.Operation operation = attr.modifier();
 
                 double quality = ImplantUtil.getQuality(implant);
 
@@ -315,7 +225,7 @@ public class ImplantUtil {
 
                 instance.addTransientModifier(new AttributeModifier(
                         uuid,
-                        "implant_" + ForgeRegistries.ATTRIBUTES.getKey(attribute) + "_" + operation.name().toLowerCase(Locale.ROOT),
+                        "implant_" + ForgeRegistries.ATTRIBUTES.getKey(attribute) + "_" + operation.name().toLowerCase(),
                         amount,
                         operation
                 ));
@@ -323,28 +233,6 @@ public class ImplantUtil {
         }
 
         entity.setHealth(entity.getHealth());
-    }
-
-    private static AttributeModifier.Operation getOperationFromString(String modifier) {
-        if (modifier == null) {
-            return AttributeModifier.Operation.MULTIPLY_TOTAL;
-        }
-
-        return switch (modifier.toLowerCase(Locale.ROOT)) {
-            case "percentage", "percent" ->
-                    AttributeModifier.Operation.MULTIPLY_TOTAL;
-
-            case "addition", "add" ->
-                    AttributeModifier.Operation.ADDITION;
-
-            default -> {
-                ZoeIsntCyberpunk.LOGGER.warn(
-                        "Unknown attribute modifier '{}', defaulting to percentage",
-                        modifier
-                );
-                yield AttributeModifier.Operation.MULTIPLY_TOTAL;
-            }
-        };
     }
 
     private static void removeImplantAttributes(LivingEntity entity) {
@@ -358,10 +246,6 @@ public class ImplantUtil {
                 }
             }
         }
-    }
-
-    private static void clampHealth(LivingEntity entity) {
-        entity.setHealth(entity.getHealth());
     }
 
     public static float getQuality(ItemStack implant) {
@@ -382,33 +266,13 @@ public class ImplantUtil {
 
         ArrayList<ItemStack> implants = capability.implants.get();
 
-        boolean allSame = Collections.frequency(implants, implants.get(0).getItem()) == implants.size();
-
-        return allSame;
+        return hasImplants(implants);
     }
 
     public static boolean hasImplants(ArrayList<ItemStack> implants) {
-        return Collections.frequency(implants, implants.get(0).getItem()) != implants.size();
-    }
-
-    public static class Builder {
-
-        public static JsonArray create(JsonObject ... args) {
-            JsonArray array = new JsonArray();
-            for (JsonObject arg : args) {
-                array.add(arg);
-            }
-            return array;
+        for (ItemStack implant : implants) {
+            if (implant.getItem() != Items.AIR) return true;
         }
-
-        public static JsonObject add(String attribute, double amplifier, String modifier)  {
-            if (attribute == null)
-                return new JsonObject();
-            JsonObject attributeObj = new JsonObject();
-            attributeObj.addProperty("attribute", attribute);
-            attributeObj.addProperty("amplifier", amplifier);
-            attributeObj.addProperty("modifier", modifier);
-            return attributeObj;
-        }
+        return false;
     }
 }

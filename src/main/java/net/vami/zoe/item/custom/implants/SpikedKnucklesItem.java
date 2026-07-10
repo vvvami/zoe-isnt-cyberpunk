@@ -1,12 +1,12 @@
 package net.vami.zoe.item.custom.implants;
 
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.vami.zoe.util.ImplantUtil;
+import net.vami.zoe.item.custom.ImplantItem;
+import net.vami.zoe.util.implant.ImplantData;
+import net.vami.zoe.util.implant.ImplantUtil;
 
 public class SpikedKnucklesItem extends ImplantItem {
     public SpikedKnucklesItem(Properties pProperties) {
@@ -25,11 +25,12 @@ public class SpikedKnucklesItem extends ImplantItem {
     }
 
     @Override
-    public void register() {
-        ImplantUtil.registerImplant(this,
-                ImplantUtil.Builder.create(
-                        ImplantUtil.Builder.add("minecraft:generic.attack_damage",
-                                0.1d, "percent")
-                ), 10f);
+    public ImplantData data() {
+        return ImplantData.build(
+                ImplantData.attributes(
+                        ImplantData.add(Attributes.ATTACK_DAMAGE,
+                                0.1d,
+                                AttributeModifier.Operation.MULTIPLY_TOTAL)),
+                10f);
     }
 }

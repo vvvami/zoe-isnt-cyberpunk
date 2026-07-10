@@ -1,4 +1,4 @@
-package net.vami.zoe.util;
+package net.vami.zoe.util.implant;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
