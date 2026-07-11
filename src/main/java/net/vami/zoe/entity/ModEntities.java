@@ -20,7 +20,7 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<VoidlingEntity>> VOIDLING =
             ENTITY_TYPES.register("voidling", () -> EntityType.Builder.of(VoidlingEntity::new, MobCategory.MONSTER)
-                    .sized(2f, 2f)
+                    .sized(0f, 0f)
                     .clientTrackingRange(8192)
                     .build("voidling"));
 

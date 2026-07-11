@@ -1,24 +1,17 @@
 package net.vami.zoe.entity.custom;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.BodyRotationControl;
-import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
-import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal;
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -31,13 +24,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import net.vami.zoe.ZoeIsntCyberpunk;
 import net.vami.zoe.entity.ModEntities;
-import net.vami.zoe.entity.SmoothBodyRotationControl;
-import net.vami.zoe.entity.SmoothMoveControl;
-import net.vami.zoe.entity.goal.DistantWalkGoal;
 import net.vami.zoe.init.ModAttributes;
 import net.vami.zoe.network.ModPackets;
 import net.vami.zoe.network.packet.VoidlingPacket;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -184,7 +173,9 @@ public class VoidlingEntity extends Monster {
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (pSource.is(DamageTypeTags.IS_PROJECTILE)
-        || pSource.is(DamageTypes.FALL)) {
+        || pSource.is(DamageTypes.FALL)
+        || pSource.is(DamageTypes.DROWN)
+        || pSource.is(DamageTypes.STALAGMITE)) {
             return false;
         }
 
@@ -260,11 +251,6 @@ public class VoidlingEntity extends Monster {
     @Override
     public boolean isPushedByFluid(FluidType type) {
         return false;
-    }
-
-    @Override
-    public boolean canBreatheUnderwater() {
-        return true;
     }
 
     private void updateForcedChunk() {
@@ -364,6 +350,7 @@ public class VoidlingEntity extends Monster {
 
         if (!this.level().isClientSide) {
             sendDistantRenderSnapshot();
+            updateForcedChunk();
         }
     }
 
@@ -397,18 +384,11 @@ public class VoidlingEntity extends Monster {
 
             level.getChunk(x >> 4, z >> 4);
 
-            int y = level.getHeight(
-                    Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                    x,
-                    z
-            );
+            int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
 
             entity.moveTo(
-                    x + 0.5,
-                    y,
-                    z + 0.5,
-                    0.0F,
-                    0.0F
+                    x + 0.5, y, z + 0.5,
+                    0, 0
             );
 
             level.addFreshEntity(entity);

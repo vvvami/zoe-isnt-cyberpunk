@@ -32,7 +32,12 @@ public class VoidlingRenderer extends MobRenderer<VoidlingEntity, VoidlingModel<
 
     @Override
     public void render(VoidlingEntity pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+        int oldHurt = pEntity.hurtTime;
+        pEntity.hurtTime = 0;
+
         super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, LightTexture.FULL_BRIGHT);
+
+        pEntity.hurtTime = oldHurt;
     }
 
     @Override
