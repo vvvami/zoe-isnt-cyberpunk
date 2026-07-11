@@ -15,6 +15,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import net.vami.zoe.ZoeIsntCyberpunk;
 import net.vami.zoe.network.packet.DoubleJumpC2SPacket;
 import net.vami.zoe.network.packet.SyncImplantsS2CPacket;
+import net.vami.zoe.network.packet.VoidlingPacket;
 
 @Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID)
 public class ModPackets {
@@ -47,6 +48,12 @@ public class ModPackets {
                 .encoder(SyncImplantsS2CPacket::encode)
                 .decoder(SyncImplantsS2CPacket::new)
                 .consumerMainThread(SyncImplantsS2CPacket::handle)
+                .add();
+
+        net.messageBuilder(VoidlingPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(VoidlingPacket::encode)
+                .decoder(VoidlingPacket::decode)
+                .consumerMainThread(VoidlingPacket::handle)
                 .add();
     }
 

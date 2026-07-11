@@ -42,7 +42,7 @@ public class ArbiterVibrateLayer<T extends LivingEntity, M extends EntityModel<T
 
         poseStack.pushPose();
 
-        poseStack.translate(x - 0.1f, y, z);
+        poseStack.translate(x, y, z);
 
         this.getParentModel().renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY,
                 1f,

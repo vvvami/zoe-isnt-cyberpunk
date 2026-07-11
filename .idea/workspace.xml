@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee3427fc-e1d1-4c3b-9e28-90552abf5c85" name="Changes" comment="added arbiter&#10;improved eara visuals when flying&#10;renamed some stuff, added/changed some packages&#10;&#10;next up is a Codec for implants">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/implant/ImplantConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/implant/ImplantData.java" afterDir="false" />
+    <list default="true" id="ee3427fc-e1d1-4c3b-9e28-90552abf5c85" name="Changes" comment="implant json configs are now all Codec-ified&#10;- cleaner ImplantUtil&#10;- better registration&#10;- probably faster&#10;- probably more efficient&#10;- cool looking&#10;- easier to work with">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/model/VoidlingModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/renderer/ClientVoidlingRender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/renderer/DistantVoidlingRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/renderer/VoidlingRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/custom/VoidlingEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/custom/VoidlingPart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/goal/DistantWalkGoal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/VoidlingPacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/entity/voidling.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
@@ -25,39 +32,35 @@
       <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.0.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.0.-1.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.0.1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/level.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/level.dat_old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/380df991-f603-344c-a090-369bad2a924a.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/380df991-f603-344c-a090-369bad2a924a.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/380df991-f603-344c-a090-369bad2a924a.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/380df991-f603-344c-a090-369bad2a924a.dat_old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/poi/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/poi/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.0.1.mca" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.-1.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.1.mca" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/session.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.1.1.mca" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/380df991-f603-344c-a090-369bad2a924a.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/stats/380df991-f603-344c-a090-369bad2a924a.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/layer/ArbiterGlowLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/layer/ArbiterGlowLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/EntityAttributesRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/EntityAttributesRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/ModEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/ModEntities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/ClientEntityLayerRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/ClientEntityLayerRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/layer/ArbiterVibrateLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/layer/ArbiterVibrateLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/model/ArbiterModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/model/ArbiterModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/custom/ArbiterEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/custom/ArbiterEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModImplantEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModImplantEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/CortexSuppressorItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/CortexSuppressorItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/EaraItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/EaraItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ImplantItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/ImplantItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/PowerfistItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/PowerfistItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ReinforcedTibiaItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ReinforcedTibiaItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/SpikedKnucklesItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/SpikedKnucklesItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/SubdermalWeaveItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/SubdermalWeaveItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ThrustersItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ThrustersItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/SyncImplantsS2CPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/SyncImplantsS2CPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ImplantRenderUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/implant/ImplantRenderUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ImplantUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/implant/ImplantUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ModTags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/ModTags.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/EaraRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/EaraRender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/ModPackets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/ModPackets.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,61 +152,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0000009612546368" />
-      <entry key="S60" value="1.0021885117392628" />
-      <entry key="M2" value="1.1243959146150573" />
-      <entry key="M5" value="2.7675585556118447" />
-      <entry key="M10" value="7.63179045665127" />
-      <entry key="M15" value="13.886975534643213" />
-      <entry key="M30" value="32.902960345744376" />
-      <entry key="H1" value="59.98976652459703" />
-      <entry key="H2" value="86.30936822275166" />
-      <entry key="H4" value="106.93155317614848" />
-      <entry key="D1" value="259.3284805495401" />
-      <entry key="W1" value="1012.7518683311109" />
+      <entry key="MS100" value="4.684714962613542E-19" />
+      <entry key="MS500" value="3.708144065056108E-4" />
+      <entry key="S2" value="0.23322783641709532" />
+      <entry key="S5" value="0.8466617572399857" />
+      <entry key="S10" value="1.3033920697423844" />
+      <entry key="S30" value="1.8617243246091806" />
+      <entry key="S60" value="2.2376263852534484" />
+      <entry key="M2" value="2.895387039272791" />
+      <entry key="M5" value="5.33715730643053" />
+      <entry key="M10" value="9.040865585899374" />
+      <entry key="M15" value="12.517953506138458" />
+      <entry key="M30" value="23.20541641857557" />
+      <entry key="H1" value="45.10499784103552" />
+      <entry key="H2" value="76.06621038558367" />
+      <entry key="H4" value="109.33557023774861" />
+      <entry key="D1" value="316.25726215259243" />
+      <entry key="W1" value="1147.1341016072802" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="1.8140733189162922E-261" />
-      <entry key="S2" value="6.567459975769881E-66" />
-      <entry key="S5" value="1.1017606146864697E-26" />
-      <entry key="S10" value="2.1001370722198692E-13" />
-      <entry key="S30" value="2.0966576690640193E-4" />
-      <entry key="S60" value="0.04453525228086967" />
-      <entry key="M2" value="0.8607994415279138" />
-      <entry key="M5" value="7.103415907122004" />
-      <entry key="M10" value="18.947487539884957" />
-      <entry key="M15" value="30.17061459582738" />
-      <entry key="M30" value="57.07049117173612" />
-      <entry key="H1" value="88.70218423918197" />
-      <entry key="H2" value="116.393281002661" />
-      <entry key="H4" value="137.58515343299115" />
-      <entry key="D1" value="290.5704373232046" />
-      <entry key="W1" value="961.570804625476" />
+      <entry key="MS100" value="1.0000000001545246" />
+      <entry key="MS500" value="1.0207483559969976" />
+      <entry key="S2" value="1.8492828471876699" />
+      <entry key="S5" value="2.8081059158009762" />
+      <entry key="S10" value="3.3357392921840385" />
+      <entry key="S30" value="4.261229222778365" />
+      <entry key="S60" value="5.463239041165409" />
+      <entry key="M2" value="7.178959735331196" />
+      <entry key="M5" value="10.52636912178799" />
+      <entry key="M10" value="14.319191855756712" />
+      <entry key="M15" value="18.066812454990114" />
+      <entry key="M30" value="29.55684286659226" />
+      <entry key="H1" value="47.91593444660126" />
+      <entry key="H2" value="69.36395096004905" />
+      <entry key="H4" value="93.3135107725628" />
+      <entry key="D1" value="289.4833267127793" />
+      <entry key="W1" value="1041.5775326339315" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.0011857371917920374" />
-      <entry key="MS500" value="0.2598948587938197" />
-      <entry key="S2" value="0.714001989842532" />
-      <entry key="S5" value="0.8739362802289911" />
-      <entry key="S10" value="0.9348455916510168" />
-      <entry key="S30" value="0.9779968196258652" />
-      <entry key="S60" value="1.0349289597614915" />
-      <entry key="M2" value="1.9731516011710928" />
-      <entry key="M5" value="9.844127260375101" />
-      <entry key="M10" value="26.53904259142977" />
-      <entry key="M15" value="44.01072767198764" />
-      <entry key="M30" value="89.92295304868685" />
-      <entry key="H1" value="148.64903952539694" />
-      <entry key="H2" value="202.67291254584575" />
-      <entry key="H4" value="244.4984145316835" />
-      <entry key="D1" value="549.8925996080424" />
-      <entry key="W1" value="1974.3198304886794" />
+      <entry key="MS100" value="3.1333642404633147E-4" />
+      <entry key="MS500" value="0.21219154833312368" />
+      <entry key="S2" value="1.6199468583034575" />
+      <entry key="S5" value="3.3744352069177634" />
+      <entry key="S10" value="4.4708579752379185" />
+      <entry key="S30" value="6.041167148108867" />
+      <entry key="S60" value="7.6344118381257475" />
+      <entry key="M2" value="10.021388228046787" />
+      <entry key="M5" value="15.828157267425125" />
+      <entry key="M10" value="23.332791708055844" />
+      <entry key="M15" value="30.559325023886455" />
+      <entry key="M30" value="52.7380434214839" />
+      <entry key="H1" value="92.9989846321747" />
+      <entry key="H2" value="145.4130599863261" />
+      <entry key="H4" value="202.63716636610354" />
+      <entry key="D1" value="605.7343642443319" />
+      <entry key="W1" value="2188.708542880199" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -246,20 +249,21 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\entity" />
+      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\java\net\vami\zoe\entity\custom" />
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\entities" />
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\java\net\vami\zoe\entity\animations\custom" />
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\java\net\vami\zoe\entity\client\model" />
-      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\data\minecraft\tags" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\entities" />
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\gui" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="net.vami.zoe.entity.custom" />
+      <recent name="net.vami.zoe.entity.client.renderer" />
       <recent name="net.vami.zoe.entity.client.layer" />
       <recent name="net.vami.zoe.item.custom.implants" />
       <recent name="net.vami.zoe.client.renderer.implant" />
-      <recent name="net.vami.zoe.event.custom" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.Zoe Isn't Cyberpunk [runClient]">
@@ -425,7 +429,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783544358494</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="implant json configs are now all Codec-ified&#10;- cleaner ImplantUtil&#10;- better registration&#10;- probably faster&#10;- probably more efficient&#10;- cool looking&#10;- easier to work with">
+      <option name="closed" value="true" />
+      <created>1783682554847</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1783682554847</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -453,7 +465,8 @@
     <MESSAGE value="added animated renderlayer&#10;fixes" />
     <MESSAGE value="fixed powerfist ability triggering for any implant" />
     <MESSAGE value="added arbiter&#10;improved eara visuals when flying&#10;renamed some stuff, added/changed some packages&#10;&#10;next up is a Codec for implants" />
-    <option name="LAST_COMMIT_MESSAGE" value="added arbiter&#10;improved eara visuals when flying&#10;renamed some stuff, added/changed some packages&#10;&#10;next up is a Codec for implants" />
+    <MESSAGE value="implant json configs are now all Codec-ified&#10;- cleaner ImplantUtil&#10;- better registration&#10;- probably faster&#10;- probably more efficient&#10;- cool looking&#10;- easier to work with" />
+    <option name="LAST_COMMIT_MESSAGE" value="implant json configs are now all Codec-ified&#10;- cleaner ImplantUtil&#10;- better registration&#10;- probably faster&#10;- probably more efficient&#10;- cool looking&#10;- easier to work with" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -48,7 +48,7 @@ public class EaraRender<T extends LivingEntity, M extends HumanoidModel<T>> exte
         implantLayer.body.copyFrom(this.getParentModel().body);
 
 
-        float speed = !realPlayer.onGround() && player.getDeltaMovement().y >= 0 ? 2f : 1f;
+        float speed = !realPlayer.onGround() && player.getDeltaMovement().y >= 0 ? 1.5f : 1f;
 
         animationTime = (long) (ageInTicks * 1000.0F * speed / 20.0F);
 
