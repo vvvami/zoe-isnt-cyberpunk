@@ -1,17 +1,19 @@
 package net.vami.zoe.item.custom.implants;
 
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vami.zoe.ZoeIsntCyberpunk;
+import net.vami.zoe.event.custom.ImplantOnEquipEvent;
 import net.vami.zoe.event.custom.ImplantOnHurtEvent;
+import net.vami.zoe.event.custom.ImplantOnUnequipEvent;
 import net.vami.zoe.item.ModItems;
 import net.vami.zoe.item.custom.ImplantItem;
-import net.vami.zoe.util.implant.ImplantConfig;
 import net.vami.zoe.util.implant.ImplantData;
 import net.vami.zoe.util.implant.ImplantUtil;
 
@@ -25,13 +27,10 @@ public class EaraItem extends ImplantItem {
     }
 
     @Override
-    public void onEquip(LivingEntity entity, ItemStack item) {
-        if (!(entity instanceof Player player)) return;
+    public void onEquip(ImplantOnEquipEvent event) {
+        Player player = event.getEntity();
         if (player.isCreative() || player.isSpectator()) return;
-
-        player.getAbilities().mayfly = true;
-        player.getAbilities().flying = true;
-        player.onUpdateAbilities();
+        EaraItem.updateFlying(player, event.getImplant(), true);
     }
 
     @SubscribeEvent
@@ -42,8 +41,7 @@ public class EaraItem extends ImplantItem {
         ArrayList<ItemStack> implants = ImplantUtil.implants(player);
         for (ItemStack implant : implants) {
             if (implant.getItem() == ModItems.EARA.get()) {
-                player.getAbilities().mayfly = true;
-                player.onUpdateAbilities();
+                EaraItem.updateFlyingJump(player, implant, true);
                 break;
             }
         }
@@ -52,13 +50,16 @@ public class EaraItem extends ImplantItem {
     @SubscribeEvent
     public static void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
-        if (player.isCreative() || player.isSpectator()) return;
+        if (player.isCreative() || player.isSpectator()) {
+            player.getAbilities().setFlyingSpeed(0.05f);
+            player.onUpdateAbilities();
+            return;
+        }
 
         ArrayList<ItemStack> implants = ImplantUtil.implants(player);
         for (ItemStack implant : implants) {
             if (implant.getItem() == ModItems.EARA.get()) {
-                player.getAbilities().mayfly = true;
-                player.onUpdateAbilities();
+                EaraItem.updateFlying(player, implant, true);
                 break;
             }
         }
@@ -68,13 +69,16 @@ public class EaraItem extends ImplantItem {
     public static void onClone(PlayerEvent.Clone event) {
         Player oldPlayer = event.getOriginal();
         Player newPlayer = event.getEntity();
-        if (newPlayer.isCreative() || newPlayer.isSpectator()) return;
+        if (oldPlayer.isCreative() || oldPlayer.isSpectator()) {
+            newPlayer.getAbilities().setFlyingSpeed(0.05f);
+            newPlayer.onUpdateAbilities();
+            return;
+        }
 
         ArrayList<ItemStack> implants = ImplantUtil.implants(oldPlayer);
         for (ItemStack implant : implants) {
             if (implant.getItem() == ModItems.EARA.get()) {
-                newPlayer.getAbilities().mayfly = true;
-                newPlayer.onUpdateAbilities();
+                EaraItem.updateFlying(newPlayer, implant, false);
                 break;
             }
         }
@@ -83,39 +87,60 @@ public class EaraItem extends ImplantItem {
     @SubscribeEvent
     public static void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
         Player player = event.getEntity();
-        if (player.isCreative() || player.isSpectator()) return;
+        if (player.isCreative() || player.isSpectator()) {
+            player.getAbilities().setFlyingSpeed(0.05f);
+            player.onUpdateAbilities();
+            return;
+        }
 
         ArrayList<ItemStack> implants = ImplantUtil.implants(player);
         for (ItemStack implant : implants) {
             if (implant.getItem() == ModItems.EARA.get()) {
-                player.getAbilities().mayfly = true;
-                player.onUpdateAbilities();
+                EaraItem.updateFlying(player, implant, true);
                 break;
             }
         }
     }
 
+    @Override
+    public void onUnequip(ImplantOnUnequipEvent event) {
+        Player player = event.getEntity();
+        if (player.isCreative() || player.isSpectator()) {
+            player.getAbilities().setFlyingSpeed(0.05f);
+            player.onUpdateAbilities();
+            return;
+        }
+
+        EaraItem.updateFlying(player, event.getImplant(), false);
+    }
 
     @Override
-    public void onUnequip(LivingEntity entity, ItemStack item) {
-        if (!(entity instanceof Player player)) return;
+    public void onHurt(LivingHurtEvent event) {
+        if (!(event.getEntity() instanceof Player player)) return;
         if (player.isCreative() || player.isSpectator()) return;
+        ArrayList<ItemStack> implants = ImplantUtil.implants(player);
+        for (ItemStack implant : implants) {
+            if (implant.getItem() == this) {
+                EaraItem.updateFlying(player, implant, false);
+            }
+        }
+    }
 
-        player.getAbilities().mayfly = false;
-        player.getAbilities().flying = false;
+    private static void updateFlying(Player player, ItemStack implant, boolean canFly) {
+        Abilities abilities = player.getAbilities();
+        abilities.mayfly = canFly;
+        abilities.flying = canFly;
+        float quality = ImplantUtil.getQuality(implant);
+        abilities.setFlyingSpeed(canFly ? quality / 1000 : 0.05f);
         player.onUpdateAbilities();
     }
 
-    @SubscribeEvent
-    public static void onHurt(ImplantOnHurtEvent event) {
-        Player player = event.getPlayer();
-        if (player.isCreative() || player.isSpectator()) return;
-
-        if (event.getItem() == ModItems.EARA.get()) {
-            player.getAbilities().flying = false;
-            player.getAbilities().mayfly = false;
-            player.onUpdateAbilities();
-        }
+    private static void updateFlyingJump(Player player, ItemStack implant, boolean canFly) {
+        Abilities abilities = player.getAbilities();
+        abilities.mayfly = canFly;
+        float quality = ImplantUtil.getQuality(implant);
+        abilities.setFlyingSpeed(canFly ? quality / 1000 : 0.05f);
+        player.onUpdateAbilities();
     }
 
     @Override

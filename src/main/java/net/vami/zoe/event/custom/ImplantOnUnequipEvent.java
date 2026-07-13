@@ -15,7 +15,7 @@ public class ImplantOnUnequipEvent extends PlayerEvent {
         this.stack = stack;
     }
 
-    public ItemStack getStack() {
+    public ItemStack getImplant() {
         return stack;
     }
 

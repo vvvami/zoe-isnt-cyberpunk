@@ -8,6 +8,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.vami.zoe.ZoeIsntCyberpunk;
 import net.vami.zoe.entity.custom.ArbiterEntity;
+import net.vami.zoe.entity.custom.CycrawlerEntity;
 import net.vami.zoe.entity.custom.VoidlingEntity;
 
 public class ModEntities {
@@ -23,6 +24,11 @@ public class ModEntities {
                     .sized(0f, 0f)
                     .clientTrackingRange(8192)
                     .build("voidling"));
+
+    public static final RegistryObject<EntityType<CycrawlerEntity>> CYCRAWLER =
+            ENTITY_TYPES.register("cycrawler", () -> EntityType.Builder.of(CycrawlerEntity::new, MobCategory.MONSTER)
+                    .sized(1f, 0.5f)
+                    .build("cycrawler"));
 
     public static void register(IEventBus bus) {
         ENTITY_TYPES.register(bus);

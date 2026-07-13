@@ -46,7 +46,7 @@ public class ImplantUtil {
             MinecraftForge.EVENT_BUS.post(unequipEvent);
 
             if (!unequipEvent.isCanceled()) {
-                oldImplantItem.onUnequip(player, oldStack);
+                oldImplantItem.onUnequip(unequipEvent);
             }
         }
 
@@ -58,7 +58,7 @@ public class ImplantUtil {
         MinecraftForge.EVENT_BUS.post(equipEvent);
 
         if (!equipEvent.isCanceled()) {
-            newImplantItem.onEquip(player, storedStack);
+            newImplantItem.onEquip(equipEvent);
         }
     }
 
@@ -75,7 +75,7 @@ public class ImplantUtil {
         if (!IUE.isCanceled()
                 && implantStack.getItem() instanceof ImplantItem implantItem) {
 
-            implantItem.onUnequip(player, implantStack);
+            implantItem.onUnequip(IUE);
         }
 
         implantList.set(slot, ItemStack.EMPTY);
@@ -149,8 +149,6 @@ public class ImplantUtil {
     );
 
     public static void applyAttributes(LivingEntity entity, boolean apply) {
-        if (!CapUtil.hasCapability(entity)) return;
-
         removeImplantAttributes(entity);
 
         if (!apply) {
@@ -158,6 +156,7 @@ public class ImplantUtil {
             return;
         }
 
+        if (!CapUtil.hasCapability(entity)) return;
         PlayerCapability capability = CapUtil.getCap(entity);
 
         // this creates a map like this

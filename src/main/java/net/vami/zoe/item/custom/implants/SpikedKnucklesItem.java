@@ -15,16 +15,6 @@ public class SpikedKnucklesItem extends ImplantItem {
     }
 
     @Override
-    public void onEquip(LivingEntity entity, ItemStack item) {
-        super.onEquip(entity, item);
-    }
-
-    @Override
-    public void onUnequip(LivingEntity entity, ItemStack item) {
-        super.onUnequip(entity, item);
-    }
-
-    @Override
     public ImplantData data() {
         return ImplantData.build(
                 ImplantData.attributes(

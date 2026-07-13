@@ -1,5 +1,10 @@
 package net.vami.zoe.item.custom.implants;
 
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vami.zoe.ZoeIsntCyberpunk;
@@ -9,7 +14,6 @@ import net.vami.zoe.util.implant.ImplantConfig;
 import net.vami.zoe.util.implant.ImplantData;
 import net.vami.zoe.util.implant.ImplantUtil;
 
-@Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID)
 public class CortexSuppressorItem extends ImplantItem {
     private static final int FRAMES = 20;
 
@@ -17,15 +21,18 @@ public class CortexSuppressorItem extends ImplantItem {
         super(pProperties);
     }
 
-    @SubscribeEvent
-    public static void onImplantHit(ImplantOnHitEvent event) {
-        // Checks that the implant is the Cortex Suppressor
-        if (!(event.getItem() instanceof CortexSuppressorItem)) return;
-        // Gets the quality of the equipped Cortex Suppressor
-        float quality = ImplantUtil.getQuality(event.getImplant());
-        // Removes the target's i-frames
-        event.getEntity().invulnerableTime = 0;
-        // Reduces the damage of the attack
+    @Override
+    public void onHit(LivingHurtEvent event) {
+        LivingEntity target = event.getEntity();
+        DamageSource damageSource = event.getSource();
+        Player source = (Player) damageSource.getEntity();
+
+        ItemStack item = ImplantUtil.getImplant(source, this);
+        if (item.isEmpty()) return;
+
+        target.invulnerableTime = 0;
+
+        float quality = ImplantUtil.getQuality(item);
         event.setAmount((float) (event.getAmount() /
                         (FRAMES - (quality / 7.5))));
     }

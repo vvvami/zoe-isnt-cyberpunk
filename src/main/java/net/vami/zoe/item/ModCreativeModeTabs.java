@@ -27,6 +27,12 @@ public class ModCreativeModeTabs {
                     pOutput.accept(ModItems.REINFORCED_TIBIA.get().getDefaultInstance());
                     pOutput.accept(ModItems.POWERFIST.get().getDefaultInstance());
                     pOutput.accept(ModItems.SUBDERMAL_WEAVE.get().getDefaultInstance());
+                    pOutput.accept(ModItems.DWARVENHANDE.get().getDefaultInstance());
+                    pOutput.accept(ModItems.CORTEX_SUPPRESSOR.get().getDefaultInstance());
+                    pOutput.accept(ModItems.SPIKED_KNUCKLES.get().getDefaultInstance());
+                    pOutput.accept(ModItems.EARA.get().getDefaultInstance());
+                    pOutput.accept(ModItems.THRUSTERS.get().getDefaultInstance());
+                    pOutput.accept(ModItems.ROTOR_JOINTS.get().getDefaultInstance());
 
                     })
                     .build());

@@ -41,12 +41,8 @@ public class VoidlingRenderer extends MobRenderer<VoidlingEntity, VoidlingModel<
     }
 
     @Override
-    protected void scale(
-            VoidlingEntity entity,
-            PoseStack poseStack,
-            float partialTick
-    ) {
+    protected void scale(VoidlingEntity entity, PoseStack poseStack, float partialTick) {
         poseStack.scale(VoidlingEntity.SCALE, VoidlingEntity.SCALE, VoidlingEntity.SCALE);
-        poseStack.translate(0d, -0.1d, 0d);
+        poseStack.translate(0d, 0.1d, 0d);
     }
 }

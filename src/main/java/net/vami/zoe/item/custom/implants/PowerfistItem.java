@@ -5,7 +5,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vami.zoe.ZoeIsntCyberpunk;
@@ -16,23 +18,25 @@ import net.vami.zoe.item.custom.ImplantItem;
 import net.vami.zoe.util.implant.ImplantConfig;
 import net.vami.zoe.util.implant.ImplantData;
 import net.vami.zoe.util.implant.ImplantUtil;
-@Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID)
 public class PowerfistItem extends ImplantItem {
     public PowerfistItem(Properties pProperties) {
         super(pProperties);
 
     }
 
-    @SubscribeEvent
-    public static void onImplantHit(ImplantOnHitEvent event) {
-        ItemStack item = event.getImplant();
+    @Override
+    public void onHit(LivingHurtEvent event) {
         LivingEntity target = event.getEntity();
         DamageSource damageSource = event.getSource();
-        Entity source = damageSource.getEntity();
+        Player source = (Player) damageSource.getEntity();
+
+        ItemStack item = ImplantUtil.getImplant(source, this);
+        if (item.isEmpty()) return;
+
         CompoundTag tag = item.getOrCreateTag();
 
         if (!damageSource.is(DamageTypes.PLAYER_ATTACK)) return;
-        if (!(item.getItem() == ModItems.POWERFIST.get())) return;
+        if (!source.getMainHandItem().isEmpty()) return;
 
         if (tag.getBoolean("zPowerfist")) {
             return;

@@ -37,6 +37,12 @@ public class ModItems {
     public static final RegistryObject<EaraItem> EARA = ITEMS.register("eara",
             () -> new EaraItem(new Item.Properties()));
 
+    public static final RegistryObject<DwarvenhandeItem> DWARVENHANDE = ITEMS.register("dwarvenhande",
+            () -> new DwarvenhandeItem(new Item.Properties()));
+
+    public static final RegistryObject<RotorJointsItem> ROTOR_JOINTS = ITEMS.register("rotor_joints",
+            () -> new RotorJointsItem(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

@@ -5,6 +5,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.world.ForgeChunkManager;
 import net.minecraftforge.entity.PartEntity;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -42,6 +44,11 @@ public class VoidlingEntity extends Monster {
     private final VoidlingPart leg6;
 
     private final PartEntity<?>[] parts;
+
+    public final AnimationState idle1 = new AnimationState();
+    public final AnimationState idle2 = new AnimationState();
+    public final AnimationState idle3 = new AnimationState();
+    private int idleAnimationTimeout = 0;
 
     public static final float SCALE = 110f;
 
@@ -87,13 +94,16 @@ public class VoidlingEntity extends Monster {
     @Override
     public void tick() {
         super.tick();
+
+        this.setNoGravity(true);
+
         if (this.level().isClientSide) {
             setupAnimationStates();
-        } else {
-            if (this.tickCount % 20 == 0) {
-                updateForcedChunk();
-                sendDistantRenderSnapshot();
-            }
+        }
+
+        updateForcedChunk();
+        if (this.tickCount % 20 == 0) {
+            sendDistantRenderSnapshot();
         }
     }
 
@@ -193,7 +203,21 @@ public class VoidlingEntity extends Monster {
     }
 
     private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = this.random.nextInt(300, 600) + 600;
+            if (Math.random() > 0.5f) {
+                this.idle1.start(this.tickCount);
+            } else {
+                this.idle3.start(this.tickCount);
+            }
 
+            if (Math.random() > 0.75f) {
+                this.idle2.start(this.tickCount);
+            }
+
+        } else {
+            --this.idleAnimationTimeout;
+        }
     }
 
     @Override
@@ -220,6 +244,11 @@ public class VoidlingEntity extends Monster {
     @Override
     public boolean shouldRenderAtSqrDistance(double distance) {
         return true;
+    }
+
+    @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return false;
     }
 
     @Override
@@ -258,41 +287,36 @@ public class VoidlingEntity extends Monster {
             return;
         }
 
-        ChunkPos currentChunk = this.chunkPosition();
+        ChunkPos current = this.chunkPosition();
 
-        if (currentChunk.equals(this.forcedChunk)) {
+        if (current.equals(this.forcedChunk)) {
             return;
         }
+        ForgeChunkManager.forceChunk(
+                serverLevel, ZoeIsntCyberpunk.MOD_ID, this,
+                current.x, current.z, true, true);
 
-        if (this.forcedChunk != null) {
-            serverLevel.setChunkForced(
-                    this.forcedChunk.x,
-                    this.forcedChunk.z,
-                    false
-            );
+        ChunkPos previous = this.forcedChunk;
+        this.forcedChunk = current;
+
+        if (previous != null) {
+            ForgeChunkManager.forceChunk(
+                    serverLevel, ZoeIsntCyberpunk.MOD_ID, this,
+                    previous.x, previous.z, false, true);
         }
-
-        serverLevel.setChunkForced(
-                currentChunk.x,
-                currentChunk.z,
-                true
-        );
-
-        this.forcedChunk = currentChunk;
     }
 
     private void releaseForcedChunk() {
-        if (this.level() instanceof ServerLevel serverLevel
-                && this.forcedChunk != null) {
-
-            serverLevel.setChunkForced(
-                    this.forcedChunk.x,
-                    this.forcedChunk.z,
-                    false
-            );
-
-            this.forcedChunk = null;
+        if (!(this.level() instanceof ServerLevel serverLevel)
+                || this.forcedChunk == null) {
+            return;
         }
+
+        ForgeChunkManager.forceChunk(
+                serverLevel, ZoeIsntCyberpunk.MOD_ID, this,
+                this.forcedChunk.x, this.forcedChunk.z, false, true);
+
+        this.forcedChunk = null;
     }
 
     private void sendDistantRenderSnapshot() {
@@ -301,27 +325,16 @@ public class VoidlingEntity extends Monster {
         }
 
         VoidlingPacket packet =
-                VoidlingPacket.active(
-                        this.getUUID(),
-                        this.getX(),
-                        this.getY(),
-                        this.getZ(),
-                        this.getYRot(),
-                        this.getXRot(),
-                        this.yBodyRot,
-                        this.tickCount
-                );
+                VoidlingPacket.active(this.getUUID(), this.getX(), this.getY(), this.getZ(),
+                        this.getYRot(), this.getXRot(), this.yBodyRot, this.tickCount);
 
         ModPackets.INSTANCE.send(
-                PacketDistributor.DIMENSION.with(
-                        serverLevel::dimension
-                ),
-                packet
-        );
+                PacketDistributor.DIMENSION.with(serverLevel::dimension), packet);
     }
 
     private boolean shouldRemoveDistantGhost(RemovalReason reason) {
-        return reason != RemovalReason.UNLOADED_TO_CHUNK;
+        return reason != RemovalReason.UNLOADED_TO_CHUNK
+                && reason != RemovalReason.UNLOADED_WITH_PLAYER;
     }
 
     @Override
@@ -330,13 +343,8 @@ public class VoidlingEntity extends Monster {
                 && shouldRemoveDistantGhost(reason)) {
 
             ModPackets.INSTANCE.send(
-                    PacketDistributor.DIMENSION.with(
-                            serverLevel::dimension
-                    ),
-                    VoidlingPacket.removed(
-                            this.getUUID()
-                    )
-            );
+                    PacketDistributor.DIMENSION.with(serverLevel::dimension),
+                    VoidlingPacket.removed(this.getUUID()));
 
             releaseForcedChunk();
         }
@@ -349,17 +357,13 @@ public class VoidlingEntity extends Monster {
         super.onAddedToWorld();
 
         if (!this.level().isClientSide) {
-            sendDistantRenderSnapshot();
             updateForcedChunk();
+            sendDistantRenderSnapshot();
         }
     }
 
-    @Mod.EventBusSubscriber(
-            modid = ZoeIsntCyberpunk.MOD_ID,
-            bus = Mod.EventBusSubscriber.Bus.FORGE
-    )
-
-    private final class Spawn {
+    @Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static final class VoidlingSpawning {
 
         @SubscribeEvent
         public static void onWorldCreated(LevelEvent.CreateSpawnPosition event) {
@@ -388,8 +392,7 @@ public class VoidlingEntity extends Monster {
 
             entity.moveTo(
                     x + 0.5, y, z + 0.5,
-                    0, 0
-            );
+                    0, 0);
 
             level.addFreshEntity(entity);
         }

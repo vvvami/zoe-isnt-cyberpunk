@@ -103,11 +103,11 @@ public class ThrustersItem extends ImplantItem {
         data.putInt(AIR_JUMPS_KEY, jumpsLeft - 1);
 
         Vec3 motion = player.getDeltaMovement();
-
+        float quality = ImplantUtil.getQuality(implant) / 200;
         player.setDeltaMovement(
-                motion.x + (player.getLookAngle().x * ImplantUtil.getQuality(implant) / 150),
-                Math.max(0, motion.y) + 0.55D,
-                motion.z + (player.getLookAngle().z * ImplantUtil.getQuality(implant) / 150)
+                motion.x + (player.getLookAngle().x * quality),
+                Math.max(0, motion.y) + (0.8d * quality),
+                motion.z + (player.getLookAngle().z * quality)
         );
 
         player.hasImpulse = true;

@@ -5,7 +5,6 @@ package net.vami.zoe.entity.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,12 +13,15 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.vami.zoe.ZoeIsntCyberpunk;
+import net.vami.zoe.entity.animations.custom.VoidlingAnimations;
+import net.vami.zoe.entity.custom.VoidlingEntity;
 
 public class VoidlingModel<T extends Entity> extends HierarchicalModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ZoeIsntCyberpunk.MOD_ID, "voidling"), "main");
 
+	private final ModelPart root;
 	public final ModelPart body;
 	private final ModelPart head;
 	private final ModelPart leg1;
@@ -30,6 +32,7 @@ public class VoidlingModel<T extends Entity> extends HierarchicalModel<T> {
 	private final ModelPart leg6;
 
 	public VoidlingModel(ModelPart root) {
+		this.root = root;
 		this.body = root.getChild("body");
 		this.head = this.body.getChild("head");
 		this.leg1 = this.body.getChild("leg1");
@@ -111,7 +114,10 @@ public class VoidlingModel<T extends Entity> extends HierarchicalModel<T> {
 
 	@Override
 	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.animate(((VoidlingEntity) entity).idle1, VoidlingAnimations.idle1, ageInTicks, 1f);
+		this.animate(((VoidlingEntity) entity).idle2, VoidlingAnimations.idle2, ageInTicks, 1f);
+		this.animate(((VoidlingEntity) entity).idle3, VoidlingAnimations.idle3, ageInTicks, 1f);
 	}
 
 	@Override
@@ -121,6 +127,6 @@ public class VoidlingModel<T extends Entity> extends HierarchicalModel<T> {
 
 	@Override
 	public ModelPart root() {
-		return this.body;
+		return this.root;
 	}
 }

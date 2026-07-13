@@ -82,7 +82,7 @@ public class ModImplantEvents {
 
         Player player = event.getEntity();
 
-        if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() != Items.AIR
+        if (!player.getMainHandItem().isEmpty()
                 || !player.isShiftKeyDown()) return;
 
 
@@ -111,7 +111,7 @@ public class ModImplantEvents {
         ArrayList<ItemStack> implants = ImplantUtil.implants(player);
         for (ItemStack item : implants) {
             if (item.getItem() == Items.AIR) continue;
-            ((ImplantItem) item.getItem()).onEquip(player, item);
+            ((ImplantItem) item.getItem()).onEquip(event);
         }
 
         if (!(player instanceof ServerPlayer serverPlayer)) return;
@@ -127,7 +127,7 @@ public class ModImplantEvents {
         ArrayList<ItemStack> implants = ImplantUtil.implants(player);
         for (ItemStack item : implants) {
             if (item.getItem() == Items.AIR) continue;
-            ((ImplantItem) item.getItem()).onUnequip(player, item);
+            ((ImplantItem) item.getItem()).onUnequip(event);
         }
     }
 
@@ -180,55 +180,22 @@ public class ModImplantEvents {
 
     @SubscribeEvent
     public static void onImplantHit(LivingHurtEvent event) {
-        if (!(event.getSource().getEntity() instanceof Player player)) return;
-
-        ArrayList<ItemStack> implants = ImplantUtil.implants(player);
-
-        if (!ImplantUtil.hasImplants(implants)) return;
-
-        float amount = event.getAmount();
-        for (ItemStack item : implants) {
-            if (!(item.getItem() instanceof ImplantItem)) continue;
-
-            ImplantOnHitEvent IHE = new ImplantOnHitEvent
-                    (item, event.getEntity(), event.getSource(), event.getAmount());
-            MinecraftForge.EVENT_BUS.post(IHE);
-
-            if (IHE.isCanceled()) {
-                event.setCanceled(IHE.isCanceled());
-                return;
+        if (!(event.getSource().getEntity() instanceof Player)) return;
+        for (Item item : ForgeRegistries.ITEMS.getValues()) {
+            if (item instanceof ImplantItem) {
+                ((ImplantItem) item).onHit(event);
             }
-
-            amount = IHE.getAmount();
         }
-        event.setAmount(amount);
     }
 
     @SubscribeEvent
     public static void onImplantHurt(LivingHurtEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-
-        ArrayList<ItemStack> implants = ImplantUtil.implants(player);
-
-        if (!ImplantUtil.hasImplants(implants)) return;
-
-        float amount = event.getAmount();
-        for (ItemStack item : implants) {
-            if (item.getItem() instanceof ImplantItem) {
-
-                ImplantOnHurtEvent IHE = new ImplantOnHurtEvent
-                        (item, player, event.getSource(), event.getAmount());
-                MinecraftForge.EVENT_BUS.post(IHE);
-
-                if (IHE.isCanceled()) {
-                    event.setCanceled(IHE.isCanceled());
-                    return;
-                }
-
-                amount = IHE.getAmount();
+        if (!(event.getEntity() instanceof Player)) return;
+        for (Item item : ForgeRegistries.ITEMS.getValues()) {
+            if (item instanceof ImplantItem) {
+                ((ImplantItem) item).onHurt(event);
             }
         }
-        event.setAmount(amount);
     }
 
     @SubscribeEvent

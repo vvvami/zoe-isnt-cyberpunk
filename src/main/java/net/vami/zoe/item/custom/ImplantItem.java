@@ -11,7 +11,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.vami.zoe.ZoeIsntCyberpunk;
+import net.vami.zoe.event.custom.ImplantOnEquipEvent;
+import net.vami.zoe.event.custom.ImplantOnUnequipEvent;
 import net.vami.zoe.util.implant.ImplantData;
 import net.vami.zoe.util.implant.ImplantUtil;
 import org.jetbrains.annotations.NotNull;
@@ -27,11 +30,11 @@ public abstract class ImplantItem extends Item {
 
     public void onTick(LivingEntity entity, ItemStack item) {}
 
-    public void onEquip(LivingEntity entity, ItemStack item) {}
-    public void onUnequip(LivingEntity entity, ItemStack item) {}
+    public void onEquip(ImplantOnEquipEvent event) {}
+    public void onUnequip(ImplantOnUnequipEvent event) {}
 
-    public void onHit(LivingEntity source, LivingEntity target, ItemStack item) {}
-    public void onHurt(Entity source, LivingEntity target, ItemStack item) {}
+    public void onHit(LivingHurtEvent event) {}
+    public void onHurt(LivingHurtEvent event) {}
     public void onDeath(Entity source, LivingEntity target, ItemStack item) {}
     public void onKill(LivingEntity source, LivingEntity target, ItemStack item) {}
 
