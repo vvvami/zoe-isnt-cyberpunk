@@ -43,6 +43,9 @@ public class ModItems {
     public static final RegistryObject<RotorJointsItem> ROTOR_JOINTS = ITEMS.register("rotor_joints",
             () -> new RotorJointsItem(new Item.Properties()));
 
+    public static final RegistryObject<OpticChitinItem> OPTIC_CHITIN = ITEMS.register("optic_chitin",
+            () -> new OpticChitinItem(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

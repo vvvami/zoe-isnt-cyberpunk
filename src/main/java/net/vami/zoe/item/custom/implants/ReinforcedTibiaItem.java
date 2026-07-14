@@ -17,15 +17,13 @@ public class ReinforcedTibiaItem extends ImplantItem {
 
     @Override
     public ImplantData data() {
-        return ImplantData.build(
-                ImplantData.attributes(
+        return ImplantData.build(10f,
                         ImplantData.add(Attributes.MOVEMENT_SPEED,
                                 0.5d,
                                 AttributeModifier.Operation.MULTIPLY_TOTAL),
 
                         ImplantData.add(ModAttributes.PLATING.get(),
                                 5,
-                                AttributeModifier.Operation.ADDITION)),
-                10f);
+                                AttributeModifier.Operation.ADDITION));
     }
 }

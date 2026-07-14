@@ -80,7 +80,7 @@ public class ThrustersItem extends ImplantItem {
     private static final int MAX_AIR_JUMPS = 1;
 
     private static void resetAirJumps(ItemStack stack) {
-        if (stack.getItem() == Items.AIR) return;
+        if (stack.isEmpty()) return;
         stack.getOrCreateTag().putInt(AIR_JUMPS_KEY, MAX_AIR_JUMPS);
     }
 

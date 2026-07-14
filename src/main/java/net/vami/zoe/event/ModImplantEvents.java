@@ -94,7 +94,7 @@ public class ModImplantEvents {
 
         for (int i = 0; i < capability.implants.get().size(); i++) {
             ItemStack implant = capability.implants.get().get(i);
-            if (implant.getItem() == Items.AIR) continue;
+            if (implant.isEmpty()) continue;
 
             System.out.println("implant: " + implant);
             System.out.println("added to inv: " + player.getInventory().add(implant.copy()));
@@ -110,7 +110,7 @@ public class ModImplantEvents {
 
         ArrayList<ItemStack> implants = ImplantUtil.implants(player);
         for (ItemStack item : implants) {
-            if (item.getItem() == Items.AIR) continue;
+            if (item.isEmpty()) continue;
             ((ImplantItem) item.getItem()).onEquip(event);
         }
 
@@ -126,7 +126,7 @@ public class ModImplantEvents {
 
         ArrayList<ItemStack> implants = ImplantUtil.implants(player);
         for (ItemStack item : implants) {
-            if (item.getItem() == Items.AIR) continue;
+            if (item.isEmpty()) continue;
             ((ImplantItem) item.getItem()).onUnequip(event);
         }
     }
@@ -140,6 +140,13 @@ public class ModImplantEvents {
 
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+
+        ImplantUtil.syncImplants(player);
+    }
+
+    @SubscribeEvent
+    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
 
         ImplantUtil.syncImplants(player);

@@ -33,6 +33,7 @@ public class ModCreativeModeTabs {
                     pOutput.accept(ModItems.EARA.get().getDefaultInstance());
                     pOutput.accept(ModItems.THRUSTERS.get().getDefaultInstance());
                     pOutput.accept(ModItems.ROTOR_JOINTS.get().getDefaultInstance());
+                    pOutput.accept(ModItems.OPTIC_CHITIN.get().getDefaultInstance());
 
                     })
                     .build());

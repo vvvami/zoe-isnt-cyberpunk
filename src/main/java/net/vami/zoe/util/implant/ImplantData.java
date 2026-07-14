@@ -70,6 +70,10 @@ public record ImplantData(boolean enabled,
         return new ImplantData(true, attributes, 0, baseHumanity, true);
     }
 
+    public static ImplantData build(float baseHumanity, Attribute ... attributes) {
+        return new ImplantData(true, Arrays.stream(attributes).toList(), 0, baseHumanity, true);
+    }
+
     public static ImplantData build(float baseHumanity) {
         return new ImplantData(true, List.of(), 0, baseHumanity, true);
     }

@@ -47,7 +47,7 @@ public abstract class ImplantItem extends Item {
         ArrayList<ItemStack> implants = ImplantUtil.implants(pPlayer);
 
         for (int i = 0; i < implants.size(); i++) {
-            if (implants.get(i).getItem() == Items.AIR) {
+            if (implants.get(i).isEmpty()) {
                 ImplantUtil.setSlot(pPlayer, pPlayer.getItemInHand(pUsedHand), i);
                 pPlayer.setItemInHand(pUsedHand, Items.AIR.getDefaultInstance());
                 ZoeIsntCyberpunk.LOGGER.debug(implants.get(i).toString());
