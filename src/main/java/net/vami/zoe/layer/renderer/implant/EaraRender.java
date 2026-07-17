@@ -16,18 +16,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.vami.zoe.layer.animations.EaraLayerAnim;
+import net.vami.zoe.layer.animations.EaraAnimations;
 import net.vami.zoe.layer.model.EaraLayer;
 import net.vami.zoe.item.ModItems;
 import net.vami.zoe.util.ResUtil;
 import org.joml.Vector3f;
 
 public class EaraRender<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> implements ImplantRenderer {
-    private static final ResourceLocation TEXTURE = ResUtil.entity("eara_layer");
+    private static final ResourceLocation TEXTURE = ResUtil.layer("eara");
     private static final Vector3f ANIMATION_VECTOR_CACHE = new Vector3f();
     private final EaraLayer implantLayer;
     private long animationTime;
-    float tickCount;
 
     public EaraRender(RenderLayerParent<T, M> parent) {
         super(parent);
@@ -52,7 +51,7 @@ public class EaraRender<T extends LivingEntity, M extends HumanoidModel<T>> exte
 
         animationTime = (long) (ageInTicks * 1000.0F * speed / 20.0F);
 
-        KeyframeAnimations.animate(implantLayer, EaraLayerAnim.eara_loop,
+        KeyframeAnimations.animate(implantLayer, EaraAnimations.eara_loop,
                 animationTime,
                 1.0F, ANIMATION_VECTOR_CACHE);
 

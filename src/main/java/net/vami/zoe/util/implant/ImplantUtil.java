@@ -129,10 +129,8 @@ public class ImplantUtil {
 
         List<ItemStack> implantsCopy = new ArrayList<>(capability.implants.get());
 
-        ModPackets.sendToTrackingAndSelf(
-                new SyncImplantsS2CPacket(player.getUUID(), implantsCopy),
-                player
-        );
+        ModPackets.sendToTrackingAndSelf(new SyncImplantsS2CPacket(player.getUUID(), implantsCopy),
+                player);
     }
 
     // every operation needs its own uuid or they wont function properly
@@ -270,7 +268,7 @@ public class ImplantUtil {
 
     public static boolean hasImplants(ArrayList<ItemStack> implants) {
         for (ItemStack implant : implants) {
-            if (implant.getItem() != Items.AIR) return true;
+            if (!implant.isEmpty()) return true;
         }
         return false;
     }

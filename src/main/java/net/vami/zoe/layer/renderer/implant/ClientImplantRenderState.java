@@ -7,18 +7,42 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-public class ClientImplantRenderState {
-    private static final Map<UUID, Set<ResourceLocation>> LAYERS_BY_PLAYER = new HashMap<>();
+public final class ClientImplantRenderState {
 
-    public static void setLayers(UUID playerId, Set<ResourceLocation> layers) {
-        LAYERS_BY_PLAYER.put(playerId, Set.copyOf(layers));
+    private static final Map<UUID, Map<ResourceLocation, Integer>>
+            LAYERS_BY_PLAYER = new HashMap<>();
+
+    private ClientImplantRenderState() {
     }
 
-    public static boolean hasLayer(UUID playerId, ResourceLocation layer) {
-        return layer != null &&
-                LAYERS_BY_PLAYER
-                        .getOrDefault(playerId, Set.of())
-                        .contains(layer);
+    public static void setLayers(
+            UUID playerId,
+            Map<ResourceLocation, Integer> layers
+    ) {
+        LAYERS_BY_PLAYER.put(
+                playerId,
+                Map.copyOf(layers)
+        );
+    }
+
+    public static boolean hasLayer(
+            UUID playerId,
+            ResourceLocation layer
+    ) {
+        return getLayerCount(playerId, layer) > 0;
+    }
+
+    public static int getLayerCount(
+            UUID playerId,
+            ResourceLocation layer
+    ) {
+        if (layer == null) {
+            return 0;
+        }
+
+        return LAYERS_BY_PLAYER
+                .getOrDefault(playerId, Map.of())
+                .getOrDefault(layer, 0);
     }
 
     public static void clear(UUID playerId) {

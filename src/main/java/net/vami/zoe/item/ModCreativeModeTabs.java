@@ -34,7 +34,9 @@ public class ModCreativeModeTabs {
                     pOutput.accept(ModItems.THRUSTERS.get().getDefaultInstance());
                     pOutput.accept(ModItems.ROTOR_JOINTS.get().getDefaultInstance());
                     pOutput.accept(ModItems.OPTIC_CHITIN.get().getDefaultInstance());
-
+                    pOutput.accept(ModItems.STEELED_JAW.get().getDefaultInstance());
+                    pOutput.accept(ModItems.ARBITRARY_STOMACH.get().getDefaultInstance());
+                    pOutput.accept(ModItems.LEGSAW.get().getDefaultInstance());
                     })
                     .build());
 

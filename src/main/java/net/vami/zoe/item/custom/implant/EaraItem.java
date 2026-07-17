@@ -1,4 +1,4 @@
-package net.vami.zoe.item.custom.implants;
+package net.vami.zoe.item.custom.implant;
 
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
@@ -10,7 +10,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vami.zoe.ZoeIsntCyberpunk;
 import net.vami.zoe.event.custom.ImplantOnEquipEvent;
-import net.vami.zoe.event.custom.ImplantOnHurtEvent;
 import net.vami.zoe.event.custom.ImplantOnUnequipEvent;
 import net.vami.zoe.item.ModItems;
 import net.vami.zoe.item.custom.ImplantItem;

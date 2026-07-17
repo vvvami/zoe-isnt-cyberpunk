@@ -3,7 +3,7 @@ package net.vami.zoe.network.packet;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkEvent;
-import net.vami.zoe.item.custom.implants.ThrustersItem;
+import net.vami.zoe.item.custom.implant.ThrustersItem;
 
 import java.util.function.Supplier;
 

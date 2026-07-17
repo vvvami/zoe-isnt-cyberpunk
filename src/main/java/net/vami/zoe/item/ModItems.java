@@ -6,7 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.vami.zoe.ZoeIsntCyberpunk;
-import net.vami.zoe.item.custom.implants.*;
+import net.vami.zoe.item.custom.implant.*;
 
 public class ModItems {
     
@@ -45,6 +45,15 @@ public class ModItems {
 
     public static final RegistryObject<OpticChitinItem> OPTIC_CHITIN = ITEMS.register("optic_chitin",
             () -> new OpticChitinItem(new Item.Properties()));
+
+    public static final RegistryObject<SteeledJawItem> STEELED_JAW = ITEMS.register("steeled_jaw",
+            () -> new SteeledJawItem(new Item.Properties()));
+
+    public static final RegistryObject<ArbitraryStomachItem> ARBITRARY_STOMACH = ITEMS.register("arbitrary_stomach",
+            () -> new ArbitraryStomachItem(new Item.Properties()));
+
+    public static final RegistryObject<LegsawItem> LEGSAW = ITEMS.register("legsaw",
+            () -> new LegsawItem(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

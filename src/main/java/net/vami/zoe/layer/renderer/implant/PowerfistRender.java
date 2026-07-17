@@ -21,12 +21,12 @@ import net.vami.zoe.util.ResUtil;
 
 public class PowerfistRender<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> implements ImplantRenderer {
     private static final ResourceLocation[] TEXTURES = new ResourceLocation[] {
-            ResUtil.entity("powerfist_layer_1"),
-            ResUtil.entity("powerfist_layer_2"),
-            ResUtil.entity("powerfist_layer_3"),
-            ResUtil.entity("powerfist_layer_4"),
-            ResUtil.entity("powerfist_layer_3"),
-            ResUtil.entity("powerfist_layer_2"),
+            ResUtil.layer("powerfist_1"),
+            ResUtil.layer("powerfist_2"),
+            ResUtil.layer("powerfist_3"),
+            ResUtil.layer("powerfist_4"),
+            ResUtil.layer("powerfist_3"),
+            ResUtil.layer("powerfist_2"),
     };
 
     private final PowerfistLayer implantLayer;

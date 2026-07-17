@@ -19,7 +19,8 @@ import net.vami.zoe.item.ModItems;
 import net.vami.zoe.util.ResUtil;
 
 public class ReinforcedTibiaRender<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> implements ImplantRenderer {
-    private static final ResourceLocation TEXTURE = ResUtil.entity("reinforced_tibia_layer");
+    private static final ResourceLocation TEXTURE =
+            ResUtil.layer("reinforced_tibia");
     private final ReinforcedTibiaLayer implantLayer;
 
     public ReinforcedTibiaRender(RenderLayerParent<T, M> parent) {
@@ -31,7 +32,7 @@ public class ReinforcedTibiaRender<T extends LivingEntity, M extends HumanoidMod
     @Override
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 
-        if (!(player instanceof Player realPlayer)) return;
+        if (!(player instanceof Player)) return;
 
         if (!ClientImplantRenderState.hasLayer(player.getUUID(), getImplant())) return;
 
@@ -42,7 +43,6 @@ public class ReinforcedTibiaRender<T extends LivingEntity, M extends HumanoidMod
 
         implantLayer.rightLeg.copyFrom(this.getParentModel().rightLeg);
         implantLayer.leftLeg.copyFrom(this.getParentModel().leftLeg);
-
         poseStack.pushPose();
 
         implantLayer.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY,

@@ -53,7 +53,7 @@ public class SyncImplantsS2CPacket {
 
             Player targetPlayer = mc.level.getPlayerByUUID(msg.playerId);
 
-            // Even if the entity is not found yet, the render cache can still be updated by UUID.
+            // even if the entity is not found yet, the render cache can still be updated by uuid
             ClientImplantRenderState.setLayers(
                     msg.playerId,
                     ImplantRenderUtil.fromImplants(msg.implants)
@@ -63,8 +63,6 @@ public class SyncImplantsS2CPacket {
                 PlayerCapability capability = CapUtil.getCap(targetPlayer);
                 capability.implants.set(new ArrayList<>(msg.implants));
             }
-
-            System.out.println("Synced implants for " + msg.playerId + ": " + msg.implants);
         });
 
         ctx.get().setPacketHandled(true);

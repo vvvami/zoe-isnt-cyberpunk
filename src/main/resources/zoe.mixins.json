@@ -6,7 +6,9 @@
   "refmap": "zoe.refmap.json",
   "mixins": [
     "FoodDataMixin",
-    "ImplantPotionMixin"
+    "ImplantPotionMixin",
+    "ImplantLivingEntityMixin",
+    "ImplantPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,21 +1,14 @@
-package net.vami.zoe.item.custom.implants;
+package net.vami.zoe.item.custom.implant;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.vami.zoe.ZoeIsntCyberpunk;
-import net.vami.zoe.event.custom.ImplantOnHitEvent;
 import net.vami.zoe.init.ModDamageTypes;
-import net.vami.zoe.item.ModItems;
 import net.vami.zoe.item.custom.ImplantItem;
-import net.vami.zoe.util.implant.ImplantConfig;
 import net.vami.zoe.util.implant.ImplantData;
 import net.vami.zoe.util.implant.ImplantUtil;
 public class PowerfistItem extends ImplantItem {

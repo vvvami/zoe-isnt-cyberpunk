@@ -4,24 +4,25 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ImplantRenderUtil {
-    public static Set<ResourceLocation> fromImplants(List<ItemStack> implants) {
-        Set<ResourceLocation> layers = new HashSet<>();
+    public static Map<ResourceLocation, Integer> fromImplants(List<ItemStack> implants) {
+        Map<ResourceLocation, Integer> counts = new HashMap<>();
 
-        for (ItemStack stack : implants) {
-            if (stack.isEmpty()) continue;
+        for (ItemStack implant : implants) {
+            if (implant.isEmpty()) {
+                continue;
+            }
 
-            ResourceLocation id = ForgeRegistries.ITEMS.getKey(stack.getItem());
+            ResourceLocation id =
+                    ForgeRegistries.ITEMS.getKey(implant.getItem());
 
             if (id != null) {
-                layers.add(id);
+                counts.merge(id, implant.getCount(), Integer::sum);
             }
         }
 
-        return layers;
+        return counts;
     }
 }

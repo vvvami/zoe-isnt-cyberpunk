@@ -1,10 +1,8 @@
-package net.vami.zoe.item.custom.implants;
+package net.vami.zoe.item.custom.implant;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -13,7 +11,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vami.zoe.ZoeIsntCyberpunk;
-import net.vami.zoe.init.ModAttributes;
 import net.vami.zoe.item.ModItems;
 import net.vami.zoe.item.custom.ImplantItem;
 import net.vami.zoe.util.implant.ImplantData;
@@ -40,10 +37,11 @@ public class DwarvenhandeItem extends ImplantItem {
                 .orElse(1);
     }
 
-    public static boolean canMineWithFist(BlockState state, float quality) {
+    public static boolean canMineWithFist(Player player, BlockState state, float quality) {
         quality = Mth.clamp(quality, 1, 100);
 
-        return state.is(BlockTags.MINEABLE_WITH_PICKAXE)
+        return player.getMainHandItem().isEmpty()
+                && state.is(BlockTags.MINEABLE_WITH_PICKAXE)
                 && quality >= getRequiredQuality(state);
     }
 
@@ -59,7 +57,7 @@ public class DwarvenhandeItem extends ImplantItem {
             if (item.isEmpty()) return;
             float quality = ImplantUtil.getQuality(item);
 
-            if (canMineWithFist(state, quality)) {
+            if (canMineWithFist(player, state, quality)) {
                 event.setCanHarvest(true);
             }
         }
@@ -73,7 +71,7 @@ public class DwarvenhandeItem extends ImplantItem {
             if (item.isEmpty()) return;
             float quality = ImplantUtil.getQuality(item);
 
-            if (canMineWithFist(state, quality)) {
+            if (canMineWithFist(player, state, quality)) {
                 event.setNewSpeed(event.getNewSpeed() * 2.0F);
             }
         }

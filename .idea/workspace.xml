@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee3427fc-e1d1-4c3b-9e28-90552abf5c85" name="Changes" comment="added cycrawler, added implants, voidling anims &#10;- added cycrawler with dynamic opacity based on distance&#10;- added dwarvenhande (mine stone barefisted)&#10;- added rotor joins (increases mining speed, needs to eliminate mining fatigue)&#10;- adjusted Thrusters double jump&#10;- added all the implants to creative menu for easy access to 100% qual&#10;- messed with some implant even shit. it needs tinkering because with the currently build, shit doesnt stack and id need separate events for each and every stacking buff, which sucks. i also need to think of synergies while taking server latency into account">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/OpticChitinRenderRegistry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/model/OpticChitinPlayerModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/renderer/OpticChitinPlayerRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/OpticChitinRenderEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/OpticChitinItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/mixin/ImplantPotionMixin.java" afterDir="false" />
+    <list default="true" id="ee3427fc-e1d1-4c3b-9e28-90552abf5c85" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/ArbitraryStomachItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/LegsawItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/SteeledJawItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/animations/LegsawAnimations.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/model/LegsawLayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/PlayerBodyPartRenderEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/LegsawRender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/mixin/ImplantLivingEntityMixin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/mixin/ImplantPlayerMixin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/models/item/arbitrary_stomach.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/models/item/rotor_joints.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/layer/legsaw.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
@@ -50,18 +56,37 @@
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.1.-1.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.1.0.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.1.1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.1.1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/session.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/380df991-f603-344c-a090-369bad2a924a.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/stats/380df991-f603-344c-a090-369bad2a924a.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModCapabilityRegistryEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModCapabilityRegistryEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModImplantEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/event/ModImplantEvents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/OpticChitinRenderRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/entity/client/OpticChitinRenderRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/ModCreativeModeTabs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/ModCreativeModeTabs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/ModItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/ModItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/ImplantItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/ImplantItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ReinforcedTibiaItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ReinforcedTibiaItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/RotorJointsItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/RotorJointsItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ThrustersItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ThrustersItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/implant/ImplantData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/implant/ImplantData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/CortexSuppressorItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/CortexSuppressorItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/DwarvenhandeItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/DwarvenhandeItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/EaraItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/EaraItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/OpticChitinItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/OpticChitinItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/PowerfistItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/PowerfistItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ReinforcedTibiaItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/ReinforcedTibiaItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/RotorJointsItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/RotorJointsItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/SpikedKnucklesItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/SpikedKnucklesItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/SubdermalWeaveItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/SubdermalWeaveItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implants/ThrustersItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/item/custom/implant/ThrustersItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/ClientLayerRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/ClientLayerRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/ClientImplantRenderState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/ClientImplantRenderState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/EaraRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/EaraRender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/PowerfistRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/PowerfistRender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/ReinforcedTibiaRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/layer/renderer/implant/ReinforcedTibiaRender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/DoubleJumpC2SPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/DoubleJumpC2SPacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/SyncImplantsS2CPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/network/packet/SyncImplantsS2CPacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ResUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/ResUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/implant/ImplantRenderUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/implant/ImplantRenderUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/implant/ImplantUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/vami/zoe/util/implant/ImplantUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/entity/eara_layer.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/layer/eara.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/entity/powerfist_layer_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/layer/powerfist_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/entity/powerfist_layer_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/layer/powerfist_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/entity/powerfist_layer_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/layer/powerfist_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/entity/powerfist_layer_4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/layer/powerfist_4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/entity/reinforced_tibia_layer.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/zoe/textures/layer/reinforced_tibia.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/zoe.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/zoe.mixins.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -154,61 +179,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.8280405709925355E-114" />
-      <entry key="MS500" value="1.951179062763079E-23" />
-      <entry key="S2" value="2.1017172162563527E-6" />
-      <entry key="S5" value="0.005358333158557022" />
-      <entry key="S10" value="0.07320063632617563" />
-      <entry key="S30" value="0.41831646078533846" />
-      <entry key="S60" value="0.6468611956288967" />
-      <entry key="M2" value="0.8405369149973014" />
-      <entry key="M5" value="3.1248318031930604" />
-      <entry key="M10" value="10.54692228186347" />
-      <entry key="M15" value="16.9235863606561" />
-      <entry key="M30" value="28.81435908710875" />
-      <entry key="H1" value="42.786689396484874" />
-      <entry key="H2" value="59.98342587481093" />
-      <entry key="H4" value="80.28171591396553" />
-      <entry key="D1" value="392.48454274182626" />
-      <entry key="W1" value="1502.6853766450365" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="8.92E-320" />
+      <entry key="S2" value="1.7281762974922354E-80" />
+      <entry key="S5" value="1.2544159221355087E-32" />
+      <entry key="S10" value="1.2556278290354528E-16" />
+      <entry key="S30" value="8.639874620610599E-6" />
+      <entry key="S60" value="0.004960260258760328" />
+      <entry key="M2" value="0.12122082318789604" />
+      <entry key="M5" value="0.8301453960148647" />
+      <entry key="M10" value="1.6034555814448892" />
+      <entry key="M15" value="2.0932802671799733" />
+      <entry key="M30" value="3.1666984326225593" />
+      <entry key="H1" value="4.423282923324481" />
+      <entry key="H2" value="5.753955972312545" />
+      <entry key="H4" value="10.752175246088893" />
+      <entry key="D1" value="179.90909157273322" />
+      <entry key="W1" value="1445.4696537085472" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000599527462954" />
-      <entry key="S2" value="1.0973930028227215" />
-      <entry key="S5" value="1.5546103200311379" />
-      <entry key="S10" value="2.2125402185522787" />
-      <entry key="S30" value="3.512987216993946" />
-      <entry key="S60" value="4.141236752824417" />
-      <entry key="M2" value="4.59900903206602" />
-      <entry key="M5" value="7.39927643020289" />
-      <entry key="M10" value="15.450113598781742" />
-      <entry key="M15" value="22.64509187257531" />
-      <entry key="M30" value="38.43074208939583" />
-      <entry key="H1" value="60.313924321878595" />
-      <entry key="H2" value="86.31571907830508" />
-      <entry key="H4" value="111.11802747632518" />
-      <entry key="D1" value="357.14712269031276" />
-      <entry key="W1" value="1325.080729410455" />
+      <entry key="MS100" value="1.0000075243584021" />
+      <entry key="MS500" value="1.094469995519764" />
+      <entry key="S2" value="1.5544003218015345" />
+      <entry key="S5" value="1.7898222962636516" />
+      <entry key="S10" value="1.8887194699474368" />
+      <entry key="S30" value="1.9614747620563018" />
+      <entry key="S60" value="1.9988381206315329" />
+      <entry key="M2" value="2.4120588720330316" />
+      <entry key="M5" value="4.8026487172235335" />
+      <entry key="M10" value="7.306211673241118" />
+      <entry key="M15" value="8.626008115115798" />
+      <entry key="M30" value="10.583780295097895" />
+      <entry key="H1" value="12.209543033672245" />
+      <entry key="H2" value="13.667591649546633" />
+      <entry key="H4" value="18.52003429749681" />
+      <entry key="D1" value="156.6882752307154" />
+      <entry key="W1" value="1211.5292341915324" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.016515906883771567" />
-      <entry key="MS500" value="0.4401524755568655" />
-      <entry key="S2" value="0.8885643952870143" />
-      <entry key="S5" value="1.4070538908983095" />
-      <entry key="S10" value="2.1513072979385237" />
-      <entry key="S30" value="3.846758701673043" />
-      <entry key="S60" value="4.736185630147805" />
-      <entry key="M2" value="5.40971013250297" />
-      <entry key="M5" value="10.496435506061552" />
-      <entry key="M10" value="25.95857469437858" />
-      <entry key="M15" value="39.52815456309683" />
-      <entry key="M30" value="67.20921804599524" />
-      <entry key="H1" value="103.0726907377741" />
-      <entry key="H2" value="146.2793665177173" />
-      <entry key="H4" value="191.387091003526" />
-      <entry key="D1" value="749.6253131380954" />
-      <entry key="W1" value="2827.762476463955" />
+      <entry key="MS100" value="0.014680516499872289" />
+      <entry key="MS500" value="0.4842122781271295" />
+      <entry key="S2" value="1.2925236059142693" />
+      <entry key="S5" value="1.6663612971292003" />
+      <entry key="S10" value="1.8231431940758762" />
+      <entry key="S30" value="1.9386870380284713" />
+      <entry key="S60" value="1.9919019217418685" />
+      <entry key="M2" value="2.5228284614365117" />
+      <entry key="M5" value="5.617286064589026" />
+      <entry key="M10" value="8.89574075913068" />
+      <entry key="M15" value="10.707827069383685" />
+      <entry key="M30" value="13.743203004895623" />
+      <entry key="H1" value="16.628599619741333" />
+      <entry key="H2" value="19.419156017367506" />
+      <entry key="H4" value="29.270458487486664" />
+      <entry key="D1" value="336.59470425681536" />
+      <entry key="W1" value="2656.9956485943294" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -226,6 +251,7 @@
     "Gradle.Build Zoe Isn't Cyberpunk.executor": "Run",
     "Gradle.C:/Users/vami/Desktop/Zoe Isn't Cyberpunk [createMcpToSrg].executor": "Run",
     "Gradle.Download Sources.executor": "Run",
+    "Gradle.Zoe Isn't Cyberpunk [buildDependents].executor": "Run",
     "Gradle.Zoe Isn't Cyberpunk [build].executor": "Run",
     "Gradle.Zoe Isn't Cyberpunk [createMcpToSrg].executor": "Run",
     "Gradle.Zoe Isn't Cyberpunk [runClient].executor": "Run",
@@ -239,7 +265,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/vami/Desktop/Zoe Isn't Cyberpunk/src/main/java/net/vami/zoe/entity/animations/custom",
+    "last_opened_file_path": "C:/Users/vami/Desktop/Zoe Isn't Cyberpunk/src/main/java/net/vami/zoe/layer/model",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -250,25 +276,51 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\java\net\vami\zoe\entity\animations\custom" />
+      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\java\net\vami\zoe\layer\model" />
+      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\layer" />
+      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\java\net\vami\zoe\layer\renderer\implant" />
+      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\java\net\vami\zoe\layer\animations" />
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\entity" />
-      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\java\net\vami\zoe\entity\custom" />
-      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\entities" />
-      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\java\net\vami\zoe\entity\client\model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\layer" />
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\entities" />
       <recent name="C:\Users\vami\Desktop\Zoe Isn't Cyberpunk\src\main\resources\assets\zoe\textures\gui" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="net.vami.zoe.item.custom.implant" />
+      <recent name="net.vami.zoe.layer.renderer.implant" />
       <recent name="net.vami.zoe.item.custom.implants" />
       <recent name="net.vami.zoe.entity.client.layer" />
       <recent name="net.vami.zoe.entity.client.renderer" />
-      <recent name="net.vami.zoe.entity.custom" />
-      <recent name="net.vami.zoe.client.renderer.implant" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.Zoe Isn't Cyberpunk [runClient]">
+    <configuration name="Zoe Isn't Cyberpunk [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="buildDependents" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
     <configuration name="Zoe Isn't Cyberpunk [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -323,6 +375,7 @@
       <list>
         <item itemvalue="Gradle.Zoe Isn't Cyberpunk [runClient]" />
         <item itemvalue="Gradle.Zoe Isn't Cyberpunk [build]" />
+        <item itemvalue="Gradle.Zoe Isn't Cyberpunk [buildDependents]" />
       </list>
     </recent_temporary>
   </component>
@@ -463,7 +516,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783972321251</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="added implant, changes, fixes&#10;- added optic chitin (less visibility with distance, reduces nametag visibility too). problem is that it completely cancels vanilla player renderer. oopsie&#10;- rotor joints now cancel mining fatigue via ImplantPotionMixin.java&#10;- Rotor Joints and Dwarvenhande were broken upon death (dig speed), fixed by not relying purely on PlayerEvent.Clone for S2C sync on death, but also a PlayerRespawnEvent.">
+      <option name="closed" value="true" />
+      <created>1784062251378</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1784062251378</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -495,7 +556,8 @@
     <MESSAGE value="added the voidling&#10;- a small cute cyber spider&#10;- helps you on your adventure&#10;- harmless" />
     <MESSAGE value="voidling changes" />
     <MESSAGE value="added cycrawler, added implants, voidling anims &#10;- added cycrawler with dynamic opacity based on distance&#10;- added dwarvenhande (mine stone barefisted)&#10;- added rotor joins (increases mining speed, needs to eliminate mining fatigue)&#10;- adjusted Thrusters double jump&#10;- added all the implants to creative menu for easy access to 100% qual&#10;- messed with some implant even shit. it needs tinkering because with the currently build, shit doesnt stack and id need separate events for each and every stacking buff, which sucks. i also need to think of synergies while taking server latency into account" />
-    <option name="LAST_COMMIT_MESSAGE" value="added cycrawler, added implants, voidling anims &#10;- added cycrawler with dynamic opacity based on distance&#10;- added dwarvenhande (mine stone barefisted)&#10;- added rotor joins (increases mining speed, needs to eliminate mining fatigue)&#10;- adjusted Thrusters double jump&#10;- added all the implants to creative menu for easy access to 100% qual&#10;- messed with some implant even shit. it needs tinkering because with the currently build, shit doesnt stack and id need separate events for each and every stacking buff, which sucks. i also need to think of synergies while taking server latency into account" />
+    <MESSAGE value="added implant, changes, fixes&#10;- added optic chitin (less visibility with distance, reduces nametag visibility too). problem is that it completely cancels vanilla player renderer. oopsie&#10;- rotor joints now cancel mining fatigue via ImplantPotionMixin.java&#10;- Rotor Joints and Dwarvenhande were broken upon death (dig speed), fixed by not relying purely on PlayerEvent.Clone for S2C sync on death, but also a PlayerRespawnEvent." />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
