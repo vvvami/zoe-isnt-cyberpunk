@@ -2,6 +2,7 @@ package net.vami.zoe.util;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.vami.zoe.ZoeIsntCyberpunk;
 
@@ -19,5 +20,9 @@ public class ResUtil {
         ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
         String name = id.getPath();
         return new ResourceLocation(ZoeIsntCyberpunk.MOD_ID, "textures/entity/" + name + ".png");
+    }
+
+    public static ResourceLocation getID(Item item) {
+        return ForgeRegistries.ITEMS.getKey(item);
     }
 }

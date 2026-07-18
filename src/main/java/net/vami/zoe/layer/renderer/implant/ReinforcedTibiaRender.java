@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.vami.zoe.layer.model.ReinforcedTibiaLayer;
 import net.vami.zoe.item.ModItems;
+import net.vami.zoe.layer.renderer.ClientImplantRenderState;
 import net.vami.zoe.util.ResUtil;
 
 public class ReinforcedTibiaRender<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> implements ImplantRenderer {

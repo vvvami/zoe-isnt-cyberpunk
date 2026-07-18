@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
 import net.vami.zoe.capability.CapUtil;
 import net.vami.zoe.capability.PlayerCapability;
-import net.vami.zoe.layer.renderer.implant.ClientImplantRenderState;
+import net.vami.zoe.layer.renderer.ClientImplantRenderState;
 import net.vami.zoe.util.implant.ImplantRenderUtil;
 
 import java.util.ArrayList;

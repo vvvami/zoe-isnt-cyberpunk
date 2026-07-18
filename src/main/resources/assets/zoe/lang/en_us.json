@@ -5,6 +5,11 @@
 
   "block.zoe.carbonsteel_block": "Carbonsteel Block",
 
-  "attribute.zoe.plating": "Plating"
+  "attribute.zoe.plating": "Plating",
+
+  "death.attack.volt": "Volt",
+  "implant.zoe.quality": "Quality",
+  "implant.zoe.on_equip": "On Equip",
+  "implant.zoe.humanity": "Humanity"
 
 }

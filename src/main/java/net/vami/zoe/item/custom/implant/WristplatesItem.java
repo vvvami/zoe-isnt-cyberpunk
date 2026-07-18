@@ -1,30 +1,29 @@
 package net.vami.zoe.item.custom.implant;
 
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.vami.zoe.init.ModAttributes;
 import net.vami.zoe.item.custom.ImplantItem;
 import net.vami.zoe.util.implant.ImplantData;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-public class SteeledJawItem extends ImplantItem {
-    public SteeledJawItem(Properties pProperties) {
+public class WristplatesItem extends ImplantItem {
+    public WristplatesItem(Properties pProperties) {
         super(pProperties);
-
     }
-
-    /**{@link net.vami.zoe.mixin.ImplantLivingEntityMixin#steelJaw$eatFast(InteractionHand, CallbackInfo) faster food eating}*/
 
     @Override
     public ImplantData data() {
         return ImplantData.build(10f,
-                ImplantData.add(ModAttributes.PLATING.get(),
-                        5f,
-                        AttributeModifier.Operation.ADDITION),
+                ImplantData.add(Attributes.ATTACK_KNOCKBACK,
+                        1d,
+                        AttributeModifier.Operation.MULTIPLY_TOTAL),
 
-                ImplantData.add(Attributes.ARMOR,
-                        5f,
+                ImplantData.add(Attributes.ATTACK_DAMAGE,
+                        0.25f,
+                        AttributeModifier.Operation.MULTIPLY_TOTAL),
+
+                ImplantData.add(ModAttributes.PLATING.get(),
+                        2.5f,
                         AttributeModifier.Operation.ADDITION));
     }
 }

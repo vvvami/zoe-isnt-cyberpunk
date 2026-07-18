@@ -100,6 +100,15 @@ public class ImplantUtil {
         return ItemStack.EMPTY;
     }
 
+    public static int implantCount(Player player, Item item) {
+        if (!CapUtil.hasCapability(player)) return 0;
+        PlayerCapability capability = CapUtil.getCap(player);
+        ArrayList<ItemStack> implantList = capability.implants.get();
+        return (int) implantList.stream()
+                .filter(stack -> stack.getItem() == item)
+                .count();
+    }
+
     public static ItemStack getSlot(int slot, PlayerCapability capability) {
         return capability.implants.get().get(slot);
     }

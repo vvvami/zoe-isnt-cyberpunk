@@ -8,23 +8,17 @@ import net.vami.zoe.item.custom.ImplantItem;
 import net.vami.zoe.util.implant.ImplantData;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-public class SteeledJawItem extends ImplantItem {
-    public SteeledJawItem(Properties pProperties) {
+public class PacemakerItem extends ImplantItem {
+    public PacemakerItem(Properties pProperties) {
         super(pProperties);
 
     }
 
-    /**{@link net.vami.zoe.mixin.ImplantLivingEntityMixin#steelJaw$eatFast(InteractionHand, CallbackInfo) faster food eating}*/
-
     @Override
     public ImplantData data() {
         return ImplantData.build(10f,
-                ImplantData.add(ModAttributes.PLATING.get(),
-                        5f,
-                        AttributeModifier.Operation.ADDITION),
-
-                ImplantData.add(Attributes.ARMOR,
-                        5f,
+                ImplantData.add(Attributes.MAX_HEALTH,
+                        10f,
                         AttributeModifier.Operation.ADDITION));
     }
 }

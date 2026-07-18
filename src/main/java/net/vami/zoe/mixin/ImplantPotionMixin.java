@@ -47,4 +47,32 @@ public class ImplantPotionMixin {
 
         cir.setReturnValue(false);
     }
+
+    @Inject(method = "forceAddEffect", at = @At("HEAD"), cancellable = true)
+    private void motorTwins$removeForceEffect(
+            MobEffectInstance pInstance, Entity pEntity, CallbackInfo ci) {
+        if (pInstance.getEffect() != MobEffects.MOVEMENT_SLOWDOWN) return;
+
+        LivingEntity entity = (LivingEntity) (Object) this;
+        if (!(entity instanceof Player player)) return;
+
+        ItemStack implant = ImplantUtil.getImplant(player, ModItems.TWIN_MOTOR.get());
+        if (implant.isEmpty()) return;
+
+        ci.cancel();
+    }
+
+    @Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z", at = @At("HEAD"), cancellable = true)
+    private void motorTwins$removeEffect(
+            MobEffectInstance pEffectInstance, Entity pEntity, CallbackInfoReturnable<Boolean> cir) {
+        if (pEffectInstance.getEffect() != MobEffects.MOVEMENT_SLOWDOWN) return;
+
+        LivingEntity entity = (LivingEntity) (Object) this;
+        if (!(entity instanceof Player player)) return;
+
+        ItemStack implant = ImplantUtil.getImplant(player, ModItems.TWIN_MOTOR.get());
+        if (implant.isEmpty()) return;
+
+        cir.setReturnValue(false);
+    }
 }

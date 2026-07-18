@@ -1,6 +1,8 @@
 package net.vami.zoe.item.custom.implant;
 
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -13,11 +15,14 @@ import net.vami.zoe.item.ModItems;
 import net.vami.zoe.item.custom.ImplantItem;
 import net.vami.zoe.util.implant.ImplantData;
 import net.vami.zoe.util.implant.ImplantUtil;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 public class RotorJointsItem extends ImplantItem {
     public RotorJointsItem(Properties pProperties) {
         super(pProperties);
     }
+
+    /**{@link net.vami.zoe.mixin.ImplantPotionMixin#rotorJoints$removeEffect(MobEffectInstance, Entity, CallbackInfoReturnable) removes mining fatigue} */
 
     @Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static final class RotorJointsEvents {

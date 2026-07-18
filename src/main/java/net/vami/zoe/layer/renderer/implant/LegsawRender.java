@@ -11,17 +11,16 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.vami.zoe.entity.client.OpticChitinRenderRegistry;
-import net.vami.zoe.entity.client.renderer.OpticChitinPlayerRenderer;
 import net.vami.zoe.item.ModItems;
 import net.vami.zoe.layer.animations.LegsawAnimations;
 import net.vami.zoe.layer.model.LegsawLayer;
+import net.vami.zoe.layer.renderer.ClientImplantRenderState;
 import net.vami.zoe.util.ResUtil;
 import org.joml.Vector3f;
 

@@ -55,6 +55,18 @@ public class ModItems {
     public static final RegistryObject<LegsawItem> LEGSAW = ITEMS.register("legsaw",
             () -> new LegsawItem(new Item.Properties()));
 
+    public static final RegistryObject<BurningPalmItem> BURNING_PALM = ITEMS.register("burning_palm",
+            () -> new BurningPalmItem(new Item.Properties()));
+
+    public static final RegistryObject<WristplatesItem> WRISTPLATES = ITEMS.register("wristplates",
+            () -> new WristplatesItem(new Item.Properties()));
+
+    public static final RegistryObject<TwinMotorItem> TWIN_MOTOR = ITEMS.register("twin_motor",
+            () -> new TwinMotorItem(new Item.Properties()));
+
+    public static final RegistryObject<PacemakerItem> PACEMAKER = ITEMS.register("pacemaker",
+            () -> new PacemakerItem(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

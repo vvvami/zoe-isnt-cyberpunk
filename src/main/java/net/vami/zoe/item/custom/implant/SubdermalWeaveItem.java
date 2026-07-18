@@ -16,7 +16,7 @@ public class SubdermalWeaveItem extends ImplantItem {
         return ImplantData.build(
                 ImplantData.attributes(
                         ImplantData.add(ModAttributes.PLATING.get(),
-                                0.5d,
+                                15d,
                                 AttributeModifier.Operation.ADDITION)),
                 10f);
     }

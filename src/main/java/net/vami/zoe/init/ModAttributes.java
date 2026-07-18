@@ -48,7 +48,6 @@ public class ModAttributes {
             Player oldP = event.getOriginal();
             Player newP = event.getEntity();
             //newP.getAttribute(VOLT.get()).setBaseValue(oldP.getAttribute(VOLT.get()).getBaseValue());
-
         }
     }
 

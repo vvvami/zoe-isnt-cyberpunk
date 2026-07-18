@@ -37,8 +37,12 @@ public class ModCreativeModeTabs {
                     pOutput.accept(ModItems.STEELED_JAW.get().getDefaultInstance());
                     pOutput.accept(ModItems.ARBITRARY_STOMACH.get().getDefaultInstance());
                     pOutput.accept(ModItems.LEGSAW.get().getDefaultInstance());
-                    })
-                    .build());
+                    pOutput.accept(ModItems.BURNING_PALM.get().getDefaultInstance());
+                    pOutput.accept(ModItems.WRISTPLATES.get().getDefaultInstance());
+                    pOutput.accept(ModItems.TWIN_MOTOR.get().getDefaultInstance());
+                    pOutput.accept(ModItems.PACEMAKER.get().getDefaultInstance());
+
+                    }).build());
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);
