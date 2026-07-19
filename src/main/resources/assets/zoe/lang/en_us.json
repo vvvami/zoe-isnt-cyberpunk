@@ -6,10 +6,24 @@
   "block.zoe.carbonsteel_block": "Carbonsteel Block",
 
   "attribute.zoe.plating": "Plating",
+  "attribute.zoe.sabotage": "Sabotage",
 
   "death.attack.volt": "Volt",
-  "implant.zoe.quality": "Quality",
-  "implant.zoe.on_equip": "On Equip",
-  "implant.zoe.humanity": "Humanity"
 
+  "tooltip.implant.zoe.quality": "Quality",
+  "tooltip.implant.zoe.quality_1": "Junk",
+  "tooltip.implant.zoe.quality_2": "Fair",
+  "tooltip.implant.zoe.quality_3": "Premium",
+  "tooltip.implant.zoe.quality_4": "Military",
+  "tooltip.implant.zoe.quality_5": "Flawless",
+
+  "tooltip.implant.zoe.on_equip": "On Equip",
+  "tooltip.implant.zoe.humanity": "Humanity",
+
+  "tooltip.implant.zoe.rank": "Rank",
+  "tag.zoe.primal_rank": "Primal",
+  "tag.zoe.novel_rank": "Novel",
+  "tag.zoe.pyrrhic_rank": "Pyrrhic",
+  "tag.zoe.chaos_rank": "Chaos",
+  "tooltip.implant.zoe.total": "Total"
 }

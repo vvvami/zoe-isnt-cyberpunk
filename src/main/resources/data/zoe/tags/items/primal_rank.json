@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "zoe:arbitrary_stomach",
+    "zoe:burning_palm",
+    "zoe:dwarvenhande",
+    "zoe:legsaw",
+    "zoe:pacemaker",
+    "zoe:reinforced_tibia",
+    "zoe:rotor_joints",
+    "zoe:spiked_knuckles",
+    "zoe:steeled_jaw",
+    "zoe:wristplates",
+    "zoe:subdermal_weave",
+    "zoe:powerfist",
+    "zoe:thrusters",
+    "zoe:twin_motor"
+  ]
+}

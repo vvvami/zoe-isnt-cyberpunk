@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "#zoe:arm_implant",
+    "#zoe:leg_implant",
+    "#zoe:skin_implant",
+    "#zoe:eye_implant",
+    "#zoe:bone_implant",
+    "#zoe:torso_implant",
+    "#zoe:head_implant",
+    "#zoe:blood_implant"
+  ]
+}

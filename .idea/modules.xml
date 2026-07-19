@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Zoe_Isn't_Cyberpunk.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Zoe_Isn't_Cyberpunk.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Zoe_Isn't_Cyberpunk.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Zoe_Isn't_Cyberpunk.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.vami.zoe.Zoe_Isn't_Cyberpunk.main.iml" filepath="$PROJECT_DIR$/.idea/modules/net.vami.zoe.Zoe_Isn't_Cyberpunk.main.iml" />
     </modules>
   </component>
 </project>

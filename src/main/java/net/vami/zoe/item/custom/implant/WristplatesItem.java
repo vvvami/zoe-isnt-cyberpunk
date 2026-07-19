@@ -19,7 +19,7 @@ public class WristplatesItem extends ImplantItem {
                         AttributeModifier.Operation.MULTIPLY_TOTAL),
 
                 ImplantData.add(Attributes.ATTACK_DAMAGE,
-                        0.25f,
+                        0.15f,
                         AttributeModifier.Operation.MULTIPLY_TOTAL),
 
                 ImplantData.add(ModAttributes.PLATING.get(),

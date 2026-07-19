@@ -22,6 +22,11 @@ public class ModTags {
         public static final TagKey<Item> ARMS_IMPLANT = tag("arms_implant");
         public static final TagKey<Item> LEGS_IMPLANT = tag("legs_implant");
 
+        public static final TagKey<Item> PRIMAL_RANK = tag("primal_rank");
+        public static final TagKey<Item> NOVEL_RANK = tag("novel_rank");
+        public static final TagKey<Item> PYRRHIC_RANK = tag("pyrrhic_rank");
+        public static final TagKey<Item> CHAOS_RANK = tag("chaos_rank");
+
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(ZoeIsntCyberpunk.MOD_ID, name));
         }
@@ -45,6 +50,7 @@ public class ModTags {
     public static class DamageTypes {
 
         public static final TagKey<DamageType> IS_MELEE = tag("is_melee");
+        public static final TagKey<DamageType> BYPASSES_PLATING = tag("bypasses_plating");
 
 
         private static TagKey<DamageType> tag(String name) {

@@ -21,7 +21,7 @@ public class TwinMotorItem extends ImplantItem {
     public ImplantData data() {
         return ImplantData.build(10f,
                 ImplantData.add(Attributes.MOVEMENT_SPEED,
-                        0.35d,
+                        0.15d,
                         AttributeModifier.Operation.ADDITION));
     }
 }

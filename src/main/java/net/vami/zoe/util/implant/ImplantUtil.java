@@ -1,6 +1,5 @@
 package net.vami.zoe.util.implant;
 
-import com.google.gson.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,9 +10,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.vami.zoe.ZoeIsntCyberpunk;
 import net.vami.zoe.capability.CapUtil;
@@ -24,7 +21,6 @@ import net.vami.zoe.item.custom.ImplantItem;
 import net.vami.zoe.network.ModPackets;
 import net.vami.zoe.network.packet.SyncImplantsS2CPacket;
 
-import java.io.*;
 import java.nio.file.Path;
 import java.util.*;
 
@@ -90,9 +86,8 @@ public class ImplantUtil {
         if (!CapUtil.hasCapability(player)) return ItemStack.EMPTY;
 
         PlayerCapability capability = CapUtil.getCap(player);
-        ArrayList<ItemStack> implantList = capability.implants.get();
 
-        for (ItemStack itemStack : implantList) {
+        for (ItemStack itemStack : capability.implants.get()) {
             if (itemStack.getItem() == item) {
                 return itemStack;
             }
@@ -159,85 +154,133 @@ public class ImplantUtil {
         removeImplantAttributes(entity);
 
         if (!apply) {
-            entity.setHealth(entity.getHealth());
+            resetHealth(entity);
             return;
         }
 
         if (!CapUtil.hasCapability(entity)) return;
+
         PlayerCapability capability = CapUtil.getCap(entity);
 
-        // this creates a map like this
-        // MOVEMENT_SPEED:
-        // ADDITION        -> 0.2
-        // MULTIPLY_TOTAL  -> 0.15
+        Map<Attribute, EnumMap<AttributeModifier.Operation, Double>> bonuses = collectAttributeBonuses(entity, capability.implants.get());
+
+        applyAttributeBonuses(entity, bonuses);
+        resetHealth(entity);
+    }
+
+    private static Map<Attribute, EnumMap<AttributeModifier.Operation, Double>> collectAttributeBonuses(LivingEntity entity, Iterable<ItemStack> implants) {
         Map<Attribute, EnumMap<AttributeModifier.Operation, Double>> bonuses = new HashMap<>();
 
-        for (ItemStack implant : capability.implants.get()) {
-            if (implant.isEmpty()) continue;
-            if (!(implant.getItem() instanceof ImplantItem implantItem)) continue;
-
-            Path path = ImplantConfig.getPath(implantItem);
-            ImplantData implantData = ImplantConfig.read(path);
-
-            if (implantData == ImplantData.DEFAULT) {
-                ZoeIsntCyberpunk.LOGGER.error("Implant file does not exist: {}", implantItem.getDescriptionId());
-                continue;
-            }
-
-            List<ImplantData.Attribute> attributes = implantData.attributes();
-
-            for (ImplantData.Attribute attr : attributes) {
-
-
-                ResourceLocation attributeId = attr.attribute();
-
-                if (attributeId == null) {
-                    continue;
-                }
-
-                Attribute attribute = ForgeRegistries.ATTRIBUTES.getValue(attributeId);
-
-                if (attribute == null || entity.getAttribute(attribute) == null) {
-                    continue;
-                }
-
-                double amplifier = attr.amplifier();
-
-                AttributeModifier.Operation operation = attr.modifier();
-
-                double quality = ImplantUtil.getQuality(implant);
-
-                double amount = amplifier * (quality / 100);
-
-                bonuses
-                        .computeIfAbsent(attribute, a -> new EnumMap<>(AttributeModifier.Operation.class))
-                        .merge(operation, amount, Double::sum);
-            }
+        for (ItemStack implant : implants) {
+            collectImplantBonuses(entity, implant, bonuses);
         }
 
+        return bonuses;
+    }
+
+    public static void collectImplantBonuses(LivingEntity entity, ItemStack implant, Map<Attribute, EnumMap<AttributeModifier.Operation, Double>> bonuses) {
+        if (implant.isEmpty()) return;
+        if (!(implant.getItem() instanceof ImplantItem implantItem)) return;
+
+        ImplantData implantData = readImplantData(implantItem);
+        if (implantData == null) return;
+
+        double qualityMultiplier = ImplantUtil.getQuality(implant) / 100;
+
+        for (ImplantData.Attribute attributeData : implantData.attributes()) {
+            collectAttributeBonus(entity, attributeData, qualityMultiplier, bonuses);
+        }
+    }
+
+    public static Map<Attribute, EnumMap<AttributeModifier.Operation, Double>>
+    collectImplantBonuses(LivingEntity entity, ItemStack implant) {
+
+        Map<Attribute, EnumMap<AttributeModifier.Operation, Double>> bonuses =
+                new LinkedHashMap<>();
+
+        collectImplantBonuses(entity, implant, bonuses);
+
+        return bonuses;
+    }
+
+    private static ImplantData readImplantData(ImplantItem implantItem) {
+        Path path = ImplantConfig.getPath(implantItem);
+        ImplantData implantData = ImplantConfig.read(path);
+
+        if (implantData == ImplantData.DEFAULT) {
+            ZoeIsntCyberpunk.LOGGER.error(
+                    "Implant file does not exist: {}",
+                    implantItem.getDescriptionId()
+            );
+
+            return null;
+        }
+
+        return implantData;
+    }
+
+    private static void collectAttributeBonus(LivingEntity entity, ImplantData.Attribute attributeData, double qualityMultiplier, Map<Attribute, EnumMap<AttributeModifier.Operation, Double>> bonuses) {
+        Attribute attribute = resolveAttribute(entity, attributeData.attribute());
+        if (attribute == null) return;
+
+        double amount = attributeData.amplifier() * qualityMultiplier;
+        if (amount == 0) return;
+
+        addBonus(bonuses, attribute, attributeData.operation(), amount);
+    }
+
+    public static Attribute resolveAttribute(LivingEntity entity, ResourceLocation attributeId) {
+        if (attributeId == null) return null;
+
+        Attribute attribute = ForgeRegistries.ATTRIBUTES.getValue(attributeId);
+
+        if (attribute == null || entity.getAttribute(attribute) == null) return null;
+
+        return attribute;
+    }
+
+    private static void addBonus(Map<Attribute, EnumMap<AttributeModifier.Operation, Double>> bonuses, Attribute attribute, AttributeModifier.Operation operation, double amount) {
+        bonuses.computeIfAbsent(
+                        attribute,
+                        ignored -> new EnumMap<>(AttributeModifier.Operation.class))
+                .merge(operation, amount, Double::sum);
+    }
+
+    private static void applyAttributeBonuses(LivingEntity entity, Map<Attribute, EnumMap<AttributeModifier.Operation, Double>> bonuses) {
         for (Map.Entry<Attribute, EnumMap<AttributeModifier.Operation, Double>> attributeEntry : bonuses.entrySet()) {
-            Attribute attribute = attributeEntry.getKey();
-            AttributeInstance instance = entity.getAttribute(attribute);
+
+            AttributeInstance instance = entity.getAttribute(attributeEntry.getKey());
 
             if (instance == null) continue;
 
-            for (Map.Entry<AttributeModifier.Operation, Double> operationEntry : attributeEntry.getValue().entrySet()) {
-                AttributeModifier.Operation operation = operationEntry.getKey();
-                double amount = operationEntry.getValue();
-
-                if (amount == 0) continue;
-
-                UUID uuid = IMPLANT_ATTRIBUTE_UUIDS.get(operation);
-
-                instance.addTransientModifier(new AttributeModifier(
-                        uuid,
-                        "implant_" + ForgeRegistries.ATTRIBUTES.getKey(attribute) + "_" + operation.name().toLowerCase(),
-                        amount,
-                        operation
-                ));
-            }
+            applyOperationBonuses(instance, attributeEntry.getKey(), attributeEntry.getValue());
         }
+    }
 
+    public static void applyOperationBonuses(AttributeInstance instance, Attribute attribute, EnumMap<AttributeModifier.Operation, Double> operationBonuses) {
+        for (Map.Entry<AttributeModifier.Operation, Double> operationEntry : operationBonuses.entrySet()) {
+            AttributeModifier.Operation operation = operationEntry.getKey();
+            double amount = operationEntry.getValue();
+
+            if (amount == 0) continue;
+
+            instance.addTransientModifier(createImplantModifier(attribute, operation, amount));
+        }
+    }
+
+    public static AttributeModifier createImplantModifier(Attribute attribute, AttributeModifier.Operation operation, double amount) {
+        UUID uuid = IMPLANT_ATTRIBUTE_UUIDS.get(operation);
+
+        return new AttributeModifier(uuid, createModifierName(attribute, operation), amount, operation);
+    }
+
+    private static String createModifierName(Attribute attribute, AttributeModifier.Operation operation) {
+        ResourceLocation attributeId = ForgeRegistries.ATTRIBUTES.getKey(attribute);
+
+        return "implant_" + attributeId + "_" + operation.name().toLowerCase();
+    }
+
+    private static void resetHealth(LivingEntity entity) {
         entity.setHealth(entity.getHealth());
     }
 
@@ -280,5 +323,48 @@ public class ImplantUtil {
             if (!implant.isEmpty()) return true;
         }
         return false;
+    }
+
+    public static double calculateAttributePreview(AttributeInstance instance, EnumMap<AttributeModifier.Operation, Double> previewBonuses) {
+        double baseValue = instance.getBaseValue();
+
+        double addition = 0d;
+        double multiplyBase = 0d;
+        double multiplyTotal = 1d;
+
+        for (AttributeModifier modifier : instance.getModifiers()) {
+            switch (modifier.getOperation()) {
+                case ADDITION ->
+                        addition += modifier.getAmount();
+
+                case MULTIPLY_BASE ->
+                        multiplyBase += modifier.getAmount();
+
+                case MULTIPLY_TOTAL ->
+                        multiplyTotal *= 1d + modifier.getAmount();
+            }
+        }
+
+        addition += previewBonuses.getOrDefault(
+                AttributeModifier.Operation.ADDITION,
+                0d);
+
+        multiplyBase += previewBonuses.getOrDefault(
+                AttributeModifier.Operation.MULTIPLY_BASE,
+                0d);
+
+        multiplyTotal *= 1d + previewBonuses.getOrDefault(
+                AttributeModifier.Operation.MULTIPLY_TOTAL,
+                0d);
+
+        double afterAddition = baseValue + addition;
+
+        double afterMultiplyBase =
+                afterAddition + afterAddition * multiplyBase;
+
+        double finalValue =
+                afterMultiplyBase * multiplyTotal;
+
+        return instance.getAttribute().sanitizeValue(finalValue);
     }
 }

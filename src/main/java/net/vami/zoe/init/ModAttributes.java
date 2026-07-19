@@ -29,6 +29,10 @@ public class ModAttributes {
             (new RangedAttribute("attribute." + ZoeIsntCyberpunk.MOD_ID + ".plating",
                     1, 1, 9999999)).setSyncable(true));
 
+    public static final RegistryObject<Attribute> SABOTAGE = ATTRIBUTES.register("sabotage", () ->
+            (new RangedAttribute("attribute." + ZoeIsntCyberpunk.MOD_ID + ".sabotage",
+                    1, 1, 2)).setSyncable(true));
+
     @SubscribeEvent
     public static void addAttributes(EntityAttributeModificationEvent event) {
         List<EntityType<? extends LivingEntity>> entityTypes = event.getTypes();
@@ -37,6 +41,7 @@ public class ModAttributes {
             Class<? extends Entity> baseClass = e.getBaseClass();
             if (baseClass.isAssignableFrom(LivingEntity.class)) {
                 event.add(e, PLATING.get());
+                event.add(e, SABOTAGE.get());
             }
         });
     }

@@ -19,7 +19,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 public record ImplantData(boolean enabled,
@@ -91,7 +90,7 @@ public record ImplantData(boolean enabled,
     public record Attribute(
             ResourceLocation attribute,
             double amplifier,
-            AttributeModifier.Operation modifier
+            AttributeModifier.Operation operation
     ) {
         private static final Codec<Attribute> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
@@ -104,8 +103,8 @@ public record ImplantData(boolean enabled,
                                 .forGetter(Attribute::amplifier),
 
                         Modifier.CODEC
-                                .fieldOf("modifier")
-                                .forGetter(Attribute::modifier)
+                                .fieldOf("operation")
+                                .forGetter(Attribute::operation)
                 ).apply(instance, Attribute::new)
         );
 
@@ -119,7 +118,7 @@ public record ImplantData(boolean enabled,
         }
 
 
-        // shitty modifier type interpreter
+        // shitty operation type interpreter
         public static class Modifier {
             public static final Codec<AttributeModifier.Operation> CODEC = Codec.STRING.comapFlatMap(
                     Modifier::decode,
@@ -137,7 +136,7 @@ public record ImplantData(boolean enabled,
                     case "percentage", "percent", "multiply_total", "total_percentage", "total_percent" ->
                             DataResult.success(AttributeModifier.Operation.MULTIPLY_TOTAL);
 
-                    default -> DataResult.error(() -> "Unknown attribute modifier operation: " + name);
+                    default -> DataResult.error(() -> "Unknown attribute operation operation: " + name);
                 };
             }
 

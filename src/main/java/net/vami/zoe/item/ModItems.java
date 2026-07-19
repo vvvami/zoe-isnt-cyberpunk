@@ -67,6 +67,9 @@ public class ModItems {
     public static final RegistryObject<PacemakerItem> PACEMAKER = ITEMS.register("pacemaker",
             () -> new PacemakerItem(new Item.Properties()));
 
+    public static final RegistryObject<HunterLensItem> HUNTER_LENS = ITEMS.register("hunter_lens",
+            () -> new HunterLensItem(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
