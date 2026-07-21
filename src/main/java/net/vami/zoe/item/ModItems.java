@@ -70,6 +70,15 @@ public class ModItems {
     public static final RegistryObject<HunterLensItem> HUNTER_LENS = ITEMS.register("hunter_lens",
             () -> new HunterLensItem(new Item.Properties()));
 
+    public static final RegistryObject<PendulockItem> PENDULOCK = ITEMS.register("pendulock",
+            () -> new PendulockItem(new Item.Properties()));
+
+    public static final RegistryObject<CellAccelerantItem> CELL_ACCELERANT = ITEMS.register("cell_accelerant",
+            () -> new CellAccelerantItem(new Item.Properties()));
+
+    public static final RegistryObject<DoubleFluxItem> DOUBLE_FLUX = ITEMS.register("double_flux",
+            () -> new DoubleFluxItem(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

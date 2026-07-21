@@ -16,6 +16,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.vami.zoe.block.ModBlocks;
 import net.vami.zoe.client.gui.ModMenuTypes;
 import net.vami.zoe.client.gui.custom.ImplantScreen;
+import net.vami.zoe.effect.ModEffects;
 import net.vami.zoe.entity.ModEntities;
 import net.vami.zoe.init.ModAttributes;
 import net.vami.zoe.item.ModCreativeModeTabs;
@@ -36,6 +37,7 @@ public class ZoeIsntCyberpunk {
         ModMenuTypes.register(modEventBus);
         ModAttributes.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModEffects.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 

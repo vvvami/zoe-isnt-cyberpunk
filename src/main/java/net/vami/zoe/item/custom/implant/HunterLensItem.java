@@ -16,9 +16,6 @@ public class HunterLensItem extends ImplantItem {
 
     @Override
     public ImplantData data() {
-        return ImplantData.build(10f,
-                ImplantData.add(Attributes.ATTACK_DAMAGE,
-                        5d,
-                        AttributeModifier.Operation.ADDITION));
+        return ImplantData.build(10f);
     }
 }

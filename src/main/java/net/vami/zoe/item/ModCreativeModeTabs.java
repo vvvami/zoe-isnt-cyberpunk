@@ -41,7 +41,10 @@ public class ModCreativeModeTabs {
                     pOutput.accept(ModItems.WRISTPLATES.get().getDefaultInstance());
                     pOutput.accept(ModItems.TWIN_MOTOR.get().getDefaultInstance());
                     pOutput.accept(ModItems.PACEMAKER.get().getDefaultInstance());
-
+                    pOutput.accept(ModItems.HUNTER_LENS.get().getDefaultInstance());
+                    pOutput.accept(ModItems.PENDULOCK.get().getDefaultInstance());
+                    pOutput.accept(ModItems.CELL_ACCELERANT.get().getDefaultInstance());
+                    pOutput.accept(ModItems.DOUBLE_FLUX.get().getDefaultInstance());
                     }).build());
 
     public static void register(IEventBus eventBus) {

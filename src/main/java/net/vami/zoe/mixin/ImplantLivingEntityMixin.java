@@ -5,10 +5,14 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.vami.zoe.item.ModItems;
 import net.vami.zoe.util.implant.ImplantUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -52,5 +56,37 @@ public class ImplantLivingEntityMixin {
         if (ImplantUtil.implantCount(player, ModItems.LEGSAW.get()) >= 2) {
             cir.setReturnValue(true);
         }
+    }
+
+    @Inject(method = "handleOnClimbable", at = @At("RETURN"), cancellable = true)
+    private void twinMotor$noVineSlow(Vec3 originalMotion, CallbackInfoReturnable<Vec3> cir) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+
+        if (!(entity instanceof Player player)) return;
+
+        BlockState state = entity.level()
+                .getBlockState(entity.blockPosition());
+
+        if (!isVine(state)) return;
+
+        if (ImplantUtil.getImplant(player, ModItems.TWIN_MOTOR.get()).isEmpty()) return;
+
+
+        Vec3 vanillaResult = cir.getReturnValue();
+
+        cir.setReturnValue(new Vec3(
+                originalMotion.x,
+                vanillaResult.y,
+                originalMotion.z));
+    }
+
+    @Unique private static boolean isVine(BlockState state) {
+        return state.is(Blocks.VINE)
+                || state.is(Blocks.CAVE_VINES)
+                || state.is(Blocks.CAVE_VINES_PLANT)
+                || state.is(Blocks.TWISTING_VINES)
+                || state.is(Blocks.TWISTING_VINES_PLANT)
+                || state.is(Blocks.WEEPING_VINES)
+                || state.is(Blocks.WEEPING_VINES_PLANT);
     }
 }

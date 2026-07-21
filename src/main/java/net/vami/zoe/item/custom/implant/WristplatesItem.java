@@ -15,7 +15,7 @@ public class WristplatesItem extends ImplantItem {
     public ImplantData data() {
         return ImplantData.build(10f,
                 ImplantData.add(Attributes.ATTACK_KNOCKBACK,
-                        1d,
+                        0.25d,
                         AttributeModifier.Operation.MULTIPLY_TOTAL),
 
                 ImplantData.add(Attributes.ATTACK_DAMAGE,
