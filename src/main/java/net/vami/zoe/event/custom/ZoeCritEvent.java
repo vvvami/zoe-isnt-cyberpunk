@@ -12,8 +12,7 @@ public class ZoeCritEvent extends Event {
     private float multiplier;
     private float knockback;
 
-    public ZoeCritEvent(LivingEntity entity,
-                        DamageSource source, float multiplier, float knockback) {
+    public ZoeCritEvent(LivingEntity entity, DamageSource source, float multiplier, float knockback) {
         this.entity = entity;
         this.source = source;
         this.multiplier = multiplier;

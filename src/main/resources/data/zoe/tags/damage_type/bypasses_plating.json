@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:bypasses_effects",
-    "zoe:volt"
+    "#minecraft:bypasses_effects"
   ]
 }

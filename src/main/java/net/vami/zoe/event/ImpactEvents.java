@@ -1,17 +1,15 @@
 package net.vami.zoe.event;
 
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vami.zoe.ZoeIsntCyberpunk;
-import net.vami.zoe.util.HurtUtil;
+import net.vami.zoe.event.custom.ZoeImpactEvent;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -19,8 +17,8 @@ import java.util.WeakHashMap;
 @Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID)
 public final class ImpactEvents {
 
-    private static final int IMPACT_COOLDOWN_TICKS = 10;
-    private static final double MIN_IMPACT_VELOCITY = 0.7d;
+    private static final int IMPACT_CD_TICKS = 0;
+    private static final double MIN_VELOCITY = 1d;
 
     private static final Map<LivingEntity, ImpactState> STATES =
             new WeakHashMap<>();
@@ -41,51 +39,51 @@ public final class ImpactEvents {
                 entity,
                 ignored -> new ImpactState());
 
-        Vec3 currentVelocity = entity.getDeltaMovement();
+        Vec3 currentVel = entity.getDeltaMovement();
 
-        if (!state.initialized) {
-            state.previousVelocity = currentVelocity;
-            state.initialized = true;
+        if (!state.init) {
+            state.prevVel = currentVel;
+            state.init = true;
             return;
         }
 
         if (state.cooldown > 0) {
             state.cooldown--;
-            state.previousVelocity = currentVelocity;
+            state.prevVel = currentVel;
             return;
         }
 
 
         if (entity.horizontalCollision) {
-            handleHorizontalImpact(
+            onHorizontalCollide(
                     entity,
-                    state.previousVelocity,
-                    currentVelocity);
+                    state.prevVel,
+                    currentVel);
         }
 
-        state.previousVelocity = currentVelocity;
+        state.prevVel = currentVel;
     }
 
-    private static void handleHorizontalImpact(LivingEntity entity, Vec3 velocityBefore, Vec3 velocityAfter) {
-        double speedBefore = velocityBefore.horizontalDistance();
+    private static void onHorizontalCollide(LivingEntity entity, Vec3 oVelocity, Vec3 velocityAfter) {
+        double oSpeed = oVelocity.horizontalDistance();
 
-        if (speedBefore < MIN_IMPACT_VELOCITY) return;
+        if (oSpeed < MIN_VELOCITY) return;
 
         double speedAfter = velocityAfter.horizontalDistance();
-        double lostSpeed = speedBefore - speedAfter;
-        double minimumLostSpeed = 0.3d;
+        double lostSpeed = oSpeed - speedAfter;
+        double minLostSpeed = 0.3d;
 
-        if (lostSpeed < minimumLostSpeed) return;
+        if (lostSpeed < minLostSpeed) return;
 
-        float impactSeverity = (float) (lostSpeed * 10d - 3d);
-        if (impactSeverity <= 0) return;
+        float impactPwr = (float) (lostSpeed * 10 - 3);
+        if (impactPwr <= 0) return;
 
         Vec3 impactDirection = new Vec3(
-                velocityBefore.x,
-                0.0D,
-                velocityBefore.z);
+                oVelocity.x,
+                0,
+                oVelocity.z);
 
-        if (impactDirection.lengthSqr() < 1.0E-8D) return;
+        if (impactDirection.lengthSqr() < 1.0e-8d) return;
 
         impactDirection = impactDirection.normalize();
 
@@ -95,37 +93,43 @@ public final class ImpactEvents {
                 entity.getZ())
                 .add(impactDirection.scale(entity.getBbWidth() * 0.5d + 0.1d));
 
+
         float explosionPower = (float) Mth.clamp(
-                Math.sqrt(impactSeverity) / 2f,
-                1f,
-                entity.getBbWidth() + entity.getBbHeight()
-        );
+                Math.sqrt(impactPwr) / 2,
+                1,
+                (entity.getBbWidth() + entity.getBbHeight()) / 1.75f);
+
+        ZoeImpactEvent impactEvent = new ZoeImpactEvent(entity, entity.getLastAttacker(), explosionPower);
+        MinecraftForge.EVENT_BUS.post(impactEvent);
+
+        if (impactEvent.isCanceled()) return;
 
         entity.invulnerableTime = 0;
         entity.level().explode(
-                entity.getLastAttacker(),
+                impactEvent.getSource(),
                 impactPosition.x,
                 impactPosition.y,
                 impactPosition.z,
-                explosionPower,
+                impactEvent.getPower(),
                 false,
                 Level.ExplosionInteraction.MOB);
+
+        entity.setDeltaMovement(oVelocity);
+        entity.hurtMarked = true;
 
         ImpactState state = STATES.get(entity);
 
         if (state != null) {
-            state.cooldown = IMPACT_COOLDOWN_TICKS;
+            state.cooldown = IMPACT_CD_TICKS;
 
-
-            state.previousVelocity = entity.getDeltaMovement();
-            entity.setDeltaMovement(0,0,0);
+            state.prevVel = entity.getDeltaMovement();
         }
     }
 
     private static final class ImpactState {
 
-        private Vec3 previousVelocity = Vec3.ZERO;
-        private boolean initialized;
+        private Vec3 prevVel = Vec3.ZERO;
+        private boolean init;
         private int cooldown;
     }
 }

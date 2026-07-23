@@ -3,6 +3,8 @@ package net.vami.zoe.item.custom.implant;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -45,6 +47,10 @@ public class RotorJointsItem extends ImplantItem {
 
     @Override
     public ImplantData data() {
-        return ImplantData.build(10f);
+        return ImplantData.build(10f,
+
+                ImplantData.add(Attributes.ATTACK_SPEED,
+                        0.25f,
+                        AttributeModifier.Operation.MULTIPLY_TOTAL));
     }
 }

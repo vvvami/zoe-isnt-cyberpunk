@@ -53,7 +53,7 @@ public class ImplantLivingEntityMixin {
 
         if (!(entity instanceof Player player)) return;
 
-        if (ImplantUtil.implantCount(player, ModItems.LEGSAW.get()) >= 2) {
+        if (ImplantUtil.count(player, ModItems.LEGSAW.get()) >= 2) {
             cir.setReturnValue(true);
         }
     }

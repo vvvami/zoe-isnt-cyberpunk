@@ -1,6 +1,7 @@
 package net.vami.zoe.item.client;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -70,9 +71,6 @@ public class ImplantTooltip {
                 + Component.translatable("implant.zoe.lore." + key.getPath()).getString()); // implant lore
 
         float quality = ImplantUtil.getQuality(stack);
-        String qualityStr = Component.literal("§6" // gold
-                + Component.translatable("tooltip.implant.zoe.quality").getString() + "§f: " // quality
-                + new DecimalFormat("##.##").format(quality)).getString(); // formatted quality number
 
         String qualityRank;
         String rankName;
@@ -92,6 +90,13 @@ public class ImplantTooltip {
             ranking = 5;
             qualityRank = "§d";
         }
+
+        String qualityStr = Component.literal("§6" // gold
+                + Component.translatable("tooltip.implant.zoe.quality").getString() + "§f: " // quality
+                + new DecimalFormat("##.##").format(quality)
+                + qualityRank + "%"
+        ).getString(); // formatted quality number
+
         rankName = Component.translatable("tooltip.implant.zoe.quality_" + ranking).getString();
         qualityRank += "(" + rankName + ")";
         Component qualityComp = Component.literal(qualityStr)
@@ -102,6 +107,7 @@ public class ImplantTooltip {
 
         Component humanity = Component.literal("§6"
                 + Component.translatable("tooltip.implant.zoe.humanity").getString() + "§f: " // humanity
+                + "§c" + "-"
                 + new DecimalFormat("##.##").format(data.humanityScaling())); // formatted humanity number
 
         Component attributes = Component.literal("§7" +Component.translatable("tooltip.implant.zoe.on_equip").getString() + ":");
@@ -151,14 +157,24 @@ public class ImplantTooltip {
         tooltip.add(rank); // rank (primal, novel, etc)
         tooltip.add(lore); // lore (info abt the implant)
 
+
         // if attributes are present, add 'em
         if (!attributeList.isEmpty()) {
+            // checks if alt is pressed, if not - show requirement for it
+            if (Screen.hasAltDown()) {
+                tooltip.add(Component.literal(" "));
+                tooltip.add(attributes); // "On Equip:"
+                tooltip.addAll(attributeList); // all the attributes n stuff
+                tooltip.add(Component.literal(" "));
+            } else {
+                tooltip.add(Component.literal(" "));
+                tooltip.add(Component.translatable("tooltip.implant.zoe.alt")
+                        .withStyle(ChatFormatting.AQUA)
+                        .withStyle(ChatFormatting.ITALIC));
+            }
+        } else {
             tooltip.add(Component.literal(" "));
-            tooltip.add(attributes); // "On Equip:"
-            tooltip.addAll(attributeList); // all the attributes n stuff
         }
-
-        tooltip.add(Component.literal(" ")); // new line for separation
 
         tooltip.add(qualityComp); // implant quality
         tooltip.add(humanity); // implant humanity req

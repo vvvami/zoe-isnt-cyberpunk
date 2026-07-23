@@ -27,5 +27,6 @@
   "tag.zoe.novel_rank": "Novel",
   "tag.zoe.pyrrhic_rank": "Pyrrhic",
   "tag.zoe.chaos_rank": "Chaos",
-  "tooltip.implant.zoe.total": "Total"
+  "tooltip.implant.zoe.total": "Total",
+  "tooltip.implant.zoe.alt": "Press Alt to view attributes"
 }

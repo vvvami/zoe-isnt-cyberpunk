@@ -95,7 +95,21 @@ public class ImplantUtil {
         return ItemStack.EMPTY;
     }
 
-    public static int implantCount(Player player, Item item) {
+    public static List<ItemStack> getImplants(Player player, Item item) {
+        ArrayList<ItemStack> implantList = new ArrayList<>();
+
+        if (!CapUtil.hasCapability(player)) return implantList;
+        PlayerCapability capability = CapUtil.getCap(player);
+
+        for (ItemStack itemStack : capability.implants.get()) {
+            if (itemStack.getItem() == item) {
+                implantList.add(itemStack);
+            }
+        }
+        return implantList;
+    }
+
+    public static int count(Player player, Item item) {
         if (!CapUtil.hasCapability(player)) return 0;
         PlayerCapability capability = CapUtil.getCap(player);
         ArrayList<ItemStack> implantList = capability.implants.get();

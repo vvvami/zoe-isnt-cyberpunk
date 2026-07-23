@@ -10,7 +10,9 @@
     "ImplantLivingEntityMixin",
     "ImplantPlayerMixin",
     "ImplantPotionMixin",
-    "ImplantWebBlockMixin"
+    "ImplantWebBlockMixin",
+    ,
+    "RangedAttributeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

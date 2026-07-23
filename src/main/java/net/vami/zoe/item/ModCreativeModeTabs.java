@@ -45,6 +45,8 @@ public class ModCreativeModeTabs {
                     pOutput.accept(ModItems.PENDULOCK.get().getDefaultInstance());
                     pOutput.accept(ModItems.CELL_ACCELERANT.get().getDefaultInstance());
                     pOutput.accept(ModItems.DOUBLE_FLUX.get().getDefaultInstance());
+                    pOutput.accept(ModItems.MARGET_EYE.get().getDefaultInstance());
+                    pOutput.accept(ModItems.HEAVY_HAND.get().getDefaultInstance());
                     }).build());
 
     public static void register(IEventBus eventBus) {

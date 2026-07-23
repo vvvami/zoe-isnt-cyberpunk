@@ -30,21 +30,21 @@ public class PowerfistItem extends ImplantItem {
     public void onHit(LivingHurtEvent event) {
         LivingEntity target = event.getEntity();
         DamageSource damageSource = event.getSource();
-        Player source = (Player) damageSource.getEntity();
+        if (!(damageSource.getEntity() instanceof Player player)) return;
 
-        ItemStack item = ImplantUtil.getImplant(source, this);
+        ItemStack item = ImplantUtil.getImplant(player, this);
         if (item.isEmpty()) return;
 
         CompoundTag tag = item.getOrCreateTag();
 
         if (!damageSource.is(DamageTypes.PLAYER_ATTACK)) return;
-        if (!source.getMainHandItem().isEmpty()) return;
+        if (!player.getMainHandItem().isEmpty()) return;
 
         if (tag.getBoolean("zPowerfist")) return;
 
         tag.putBoolean("zPowerfist", true);
 
-        target.hurt(HurtUtil.get(source, ModDamageTypes.VOLT),
+        target.hurt(HurtUtil.get(player, ModDamageTypes.VOLT),
                 ImplantUtil.getQuality(item) / 20);
 
         tag.putBoolean("zPowerfist", false);

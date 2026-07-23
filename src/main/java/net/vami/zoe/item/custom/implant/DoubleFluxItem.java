@@ -76,8 +76,8 @@ public class DoubleFluxItem extends ImplantItem {
         ItemStack item = ImplantUtil.getImplant(player, ModItems.DOUBLE_FLUX.get());
         if (item.isEmpty()) return;
 
-        event.setKnockback(event.getKnockback() * 77);
-        event.setMultiplier(event.getMultiplier() * 77);
+        event.setKnockback(event.getKnockback() * 22);
+        event.setMultiplier(event.getMultiplier() * 22);
     }
 
     @Override

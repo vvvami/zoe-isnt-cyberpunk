@@ -79,6 +79,12 @@ public class ModItems {
     public static final RegistryObject<DoubleFluxItem> DOUBLE_FLUX = ITEMS.register("double_flux",
             () -> new DoubleFluxItem(new Item.Properties()));
 
+    public static final RegistryObject<MargetEyeItem> MARGET_EYE = ITEMS.register("marget_eye",
+            () -> new MargetEyeItem(new Item.Properties()));
+
+    public static final RegistryObject<HeavyHandItem> HEAVY_HAND = ITEMS.register("heavy_hand",
+            () -> new HeavyHandItem(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

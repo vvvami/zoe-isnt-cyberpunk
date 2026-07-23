@@ -2,30 +2,29 @@ package net.vami.zoe.item.custom.implant;
 
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.vami.zoe.ZoeIsntCyberpunk;
 import net.vami.zoe.init.ModAttributes;
 import net.vami.zoe.item.custom.ImplantItem;
 import net.vami.zoe.util.implant.ImplantData;
 
-@Mod.EventBusSubscriber(modid = ZoeIsntCyberpunk.MOD_ID)
-public class WristplatesItem extends ImplantItem {
-    public WristplatesItem(Properties pProperties) {
+public class HeavyHandItem extends ImplantItem {
+    public HeavyHandItem(Properties pProperties) {
         super(pProperties);
+
     }
 
     @Override
     public ImplantData data() {
         return ImplantData.build(10f,
+                ImplantData.add(Attributes.ATTACK_KNOCKBACK,
+                        5,
+                        AttributeModifier.Operation.ADDITION),
 
-                ImplantData.add(Attributes.ATTACK_DAMAGE,
-                        0.15f,
-                        AttributeModifier.Operation.MULTIPLY_TOTAL),
+                ImplantData.add(Attributes.ARMOR,
+                        2,
+                        AttributeModifier.Operation.ADDITION),
 
                 ImplantData.add(ModAttributes.PLATING.get(),
-                        2.5f,
+                        2,
                         AttributeModifier.Operation.ADDITION));
     }
 }
