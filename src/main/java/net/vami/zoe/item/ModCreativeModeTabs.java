@@ -47,6 +47,9 @@ public class ModCreativeModeTabs {
                     pOutput.accept(ModItems.DOUBLE_FLUX.get().getDefaultInstance());
                     pOutput.accept(ModItems.MARGET_EYE.get().getDefaultInstance());
                     pOutput.accept(ModItems.HEAVY_HAND.get().getDefaultInstance());
+                    pOutput.accept(ModItems.WIRED_TENDONS.get().getDefaultInstance());
+                    pOutput.accept(ModItems.SECOND_HEART.get().getDefaultInstance());
+                    pOutput.accept(ModItems.MOUNTAIN_SHATTERING_LACE.get().getDefaultInstance());
                     }).build());
 
     public static void register(IEventBus eventBus) {

@@ -77,6 +77,16 @@ public class ModImplantEvents {
     }
 
     @SubscribeEvent
+    public static void playerRespawnApplyImplantAttributes(PlayerEvent.PlayerRespawnEvent event) {
+        Player player = event.getEntity();
+
+        if (!player.level().isClientSide) {
+            ImplantUtil.applyAttributes(player, true);
+            player.setHealth(player.getMaxHealth());
+        }
+    }
+
+    @SubscribeEvent
     public static void implantUnequip(PlayerInteractEvent.RightClickBlock event) {
         if (event.getLevel().isClientSide()) return;
 

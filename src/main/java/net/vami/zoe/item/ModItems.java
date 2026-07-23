@@ -85,6 +85,16 @@ public class ModItems {
     public static final RegistryObject<HeavyHandItem> HEAVY_HAND = ITEMS.register("heavy_hand",
             () -> new HeavyHandItem(new Item.Properties()));
 
+    public static final RegistryObject<WiredTendonsItem> WIRED_TENDONS = ITEMS.register("wired_tendons",
+            () -> new WiredTendonsItem(new Item.Properties()));
+
+    public static final RegistryObject<SecondHeartItem> SECOND_HEART = ITEMS.register("second_heart",
+            () -> new SecondHeartItem(new Item.Properties()));
+
+    public static final RegistryObject<MountainShatteringLaceItem> MOUNTAIN_SHATTERING_LACE =
+            ITEMS.register("mountain_shattering_lace",
+            () -> new MountainShatteringLaceItem(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

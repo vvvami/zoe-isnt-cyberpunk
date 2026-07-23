@@ -81,11 +81,13 @@ public class ModCombatEvents {
                 directEntity.getDeltaMovement().scale(0.5f) :
                 directEntity.getLookAngle().scale(attackKB);
 
-        entity.hurtMarked = true;
         entity.setDeltaMovement(new Vec3(
                 (entity.getDeltaMovement().x() + (direction.x) / kbResist),
                 (entity.getDeltaMovement().y() + (direction.y) / kbResist),
                 (entity.getDeltaMovement().z() + (direction.z) / kbResist)));
+
+        player.hasImpulse = true;
+        player.hurtMarked = true;
 
         event.setAmount(event.getAmount() * critEvent.getMultiplier());
 
@@ -123,7 +125,7 @@ public class ModCombatEvents {
     public static void zoeGetKnockback(LivingDamageEvent event) {
         if (event.getEntity().level().isClientSide()) return;
         DamageSource source = event.getSource();
-        if (!(source.getEntity() instanceof LivingEntity sourceEntity)) return;
+        if (!(source.getEntity() instanceof Player sourceEntity)) return;
 
         Entity directEntity = source.getDirectEntity() == null ? sourceEntity : source.getDirectEntity();
 
@@ -139,11 +141,15 @@ public class ModCombatEvents {
                 direction.y);
         entity.getPersistentData().putDouble("zoeKnockbackZ",
                 direction.z);
+
+        entity.getPersistentData().putBoolean("zoeKnockback", true);
     }
 
     @SubscribeEvent(priority =  EventPriority.LOWEST)
     public static void zoeDealKnockback(LivingKnockBackEvent event) {
         LivingEntity entity = event.getEntity();
+
+        if (!entity.getPersistentData().getBoolean("zoeKnockback")) return;
 
         float strength = event.getStrength();
         event.setCanceled(true);
@@ -164,5 +170,9 @@ public class ModCombatEvents {
                 (entity.getDeltaMovement().y() + extraY + (direction.y / kbResist)),
                 (entity.getDeltaMovement().z() + direction.z / kbResist)));
 
+        entity.hasImpulse = true;
+        entity.hurtMarked = true;
+
+        entity.getPersistentData().putBoolean("zoeKnockback", false);
     }
 }

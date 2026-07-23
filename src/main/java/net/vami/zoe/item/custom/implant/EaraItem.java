@@ -144,6 +144,6 @@ public class EaraItem extends ImplantItem {
 
     @Override
     public ImplantData data() {
-        return ImplantData.build(10f);
+        return ImplantData.build(15f);
     }
 }

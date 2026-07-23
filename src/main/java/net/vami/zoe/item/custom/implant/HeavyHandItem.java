@@ -16,7 +16,7 @@ public class HeavyHandItem extends ImplantItem {
     public ImplantData data() {
         return ImplantData.build(10f,
                 ImplantData.add(Attributes.ATTACK_KNOCKBACK,
-                        5,
+                        2.5,
                         AttributeModifier.Operation.ADDITION),
 
                 ImplantData.add(Attributes.ARMOR,

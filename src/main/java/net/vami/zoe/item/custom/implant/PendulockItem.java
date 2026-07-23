@@ -64,7 +64,7 @@ public class PendulockItem extends ImplantItem {
     public ImplantData data() {
         return ImplantData.build(10f,
                 ImplantData.add(ForgeMod.ENTITY_GRAVITY.get(),
-                        0.5d,
+                        0.25d,
                         AttributeModifier.Operation.MULTIPLY_TOTAL));
     }
 }
